@@ -46,12 +46,12 @@ namespace ProductManagement
                     case "2":
                         Show();
                         break;
-                    //case "3":
-                    //    Edit();
-                    //    break;
-                    //case "4":
-                    //    Delete();
-                    //    break;
+                    case "3":
+                        Edit();
+                        break;
+                    case "4":
+                        Delete();
+                        break;
                     //case "5":
                     //    Close();
                     //    break;
@@ -107,6 +107,32 @@ namespace ProductManagement
             //    public required string ColourName { get; set; }
             //};
 
+
+            //static void ShowLinq()
+            //{
+            //    lipstickNames.ForEach(x => { Console.WriteLine(x); });
+            //}
+
+            //static void Showfor()
+            //{
+            //    for (int i = 0; i < lipstickNames.Count; i++)
+            //    {
+            //        Console.WriteLine(lipstickNames[i]);
+            //    }
+            //}
+
+            //static void Showcontainswhile()
+            //{
+            //    int length = lipstickBrands.Count;
+            //    int position = 0;
+
+            //    while (position < length)
+            //    {
+            //        Console.WriteLine(lipstickBrands[position]);
+            //        position++;
+            //    }
+            //}
+
         }
 
 
@@ -135,39 +161,106 @@ namespace ProductManagement
 
         }
 
-        static void ShowLinq()
+        static void Show()
         {
-            lipstickNames.ForEach(x => { Console.WriteLine(x); });
-        }
+            foreach (var l in lipstickBrands)
+            {
+                Console.WriteLine(l);
+            }
 
-        static void ShowForEach()
-        {
+            foreach (var l in lipstickNames)
+            {
+                Console.WriteLine(l);
+            }
+
+            foreach (var l in lipstickColours)
+            {
+                Console.WriteLine(l);
+            }
+
             foreach (var l in lipstickPrices)
             {
                 Console.WriteLine(l.ToString());
             }
+
         }
 
-        static void Showfor()
+        static void Edit()
         {
-            for (int i = 0; i < lipstickNames.Count; i++)
+            Console.WriteLine("Please, enter the brand you want to edit: ");
+            string editInputBrand = Console.ReadLine();
+            if (editInputBrand == lipstickBrands[0])
+            {   Console.WriteLine("Enter the new brand: ");
+                string newLipstickBrand = Console.ReadLine();
+                //lipstickBrands.Remove(editInputBrands);
+                //lipstickBrands.Add(newLipstickBrand);
+                //lipstickBrand = lipstickBrand.Replace(editInputBrands, newLipstickBrand);
+                //List<string>LipstickBrands.Replace(editInputBrands, newLipstickBrand);
+                lipstickBrands[0] = newLipstickBrand;
+            }
+            Console.WriteLine("Please, enter the name you want to edit: ");
+            string editInputName = Console.ReadLine();
+            if (editInputName == lipstickNames[0])
             {
-                Console.WriteLine(lipstickNames[i]);
+                Console.WriteLine("Enter the new name: ");
+                string newLipstickName = Console.ReadLine();
+                lipstickNames[0] = newLipstickName;
+            }
+            Console.WriteLine("Please, enter the colour you want to edit: ");
+            string editInputColour = Console.ReadLine();
+            if (editInputColour == lipstickColours[0])
+            {
+                Console.WriteLine("Enter the new colour: ");
+                string newLipstickColour = Console.ReadLine();
+                lipstickColours[0] = newLipstickColour;
+            }
+
+            Console.WriteLine("Please, enter the price you want to edit: ");
+            decimal editInputPrice = Convert.ToDecimal(Console.ReadLine());
+            if (editInputPrice == lipstickPrices[0])
+            {
+                Console.WriteLine("Enter the new brand: ");
+                decimal newLipstickPrice = Convert.ToDecimal(Console.ReadLine());
+                lipstickPrices[0] = newLipstickPrice;
             }
         }
-
-        static void Showcontainswhile()
+        static void Delete()
         {
-            int length = lipstickBrands.Count;
-            int position = 0;
+            Console.WriteLine("Please, enter the brand: ");
+            string removeInputBrands = Console.ReadLine();
 
-            while (position < length)
+            if (removeInputBrands == lipstickBrands[0])
             {
-                Console.WriteLine(lipstickBrands[position]);
-                position++;
+                
+                lipstickBrands.Remove(removeInputBrands);
+
             }
+
+            Console.WriteLine("Please, enter the name: ");
+            string removeInputNames = Console.ReadLine();
+            if (removeInputNames == lipstickNames[0])
+            {
+                lipstickNames.Remove(removeInputNames);
+
+            }
+
+            Console.WriteLine("Please, enter the colour: ");
+            string removeInputColours = Console.ReadLine();
+            if (removeInputColours == lipstickColours[0])
+            {
+                lipstickColours.Remove(removeInputColours);
+
+            }
+
+            Console.WriteLine("Please, enter the price: ");
+            decimal removeInputPrices = Convert.ToDecimal(Console.ReadLine());
+            if (removeInputPrices == lipstickPrices[0])
+            {
+                lipstickPrices.Remove(removeInputPrices);
+
+            }
+
         }
 
     }
-
 }
