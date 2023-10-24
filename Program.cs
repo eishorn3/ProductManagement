@@ -46,12 +46,12 @@ namespace ProductManagement
                     case "3":
                         Edit();
                         break;
-                    //case "4":
-                    //    Delete();
-                    //    break;
-                    //case "5":
-                    //    Close();
-                    //    break;
+                    case "4":
+                        Delete();
+                        break;
+                    case "5":
+                        Close();
+                        break;
                     default:
                         Console.WriteLine("Sorry, wrong input");
                         break;
@@ -62,75 +62,6 @@ namespace ProductManagement
 
 
 
-            //static void Edit()
-            //{
-            //    Console.WriteLine
-            //}
-
-
-            //    string[] lipstickBrand = { "Douglas", "Chanel", "Dior" };
-            //    Array.ForEach(lipstickBrand, Console.WriteLine);
-
-            //    string[] lipstickName = { "Mirror Shine", "Rouge Allure", "Dior Addict" };
-            //    Array.ForEach(lipstickName, Console.WriteLine);
-
-            //    string[] lipstickColour = { "Tease Me", "Pirate", "Vinyl Red" };
-            //    Array.ForEach(lipstickColour, Console.WriteLine);
-
-            //    double[] lipstickPrice = { 12.99, 45.83, 44.49 };
-            //    Array.ForEach(lipstickPrice, Console.WriteLine);
-
-            //    string[,] lipsticks = {
-            //        { "Douglas", "Mirror Shine", "Tease Me", "12.99" },
-            //        { "Chanel", "Mirror Shine", "Pirate", "45.83" },
-            //        {"Dior", "Dior Addict", "Vinyl Red", "44.49" }
-            //    };
-
-            //    Console.WriteLine("Brand:");
-            //    string userInputBrand = Console.ReadLine();
-            //    string[] newLipstickBrand = lipstickBrand.Concat(new string[] { userInputBrand }).ToArray();
-            //    lipstickBrand = newLipstickBrand;
-            //    Array.ForEach(lipstickBrand, Console.WriteLine);
-            //}
-
-            //public record Lipstick(string BrandName, string Colour, string LipstickName, double LipstickPrice);
-            //public static void Main()
-            //{
-            //    Lipstick lipstick = new("Chanel", "FuriousRed", "Passionista", 15.88); //prints but in arraystyle
-            //    Console.WriteLine(lipstick);
-            //}
-
-            //public record Lipsticks
-            //{
-            //    public required string BrandName { get; set; }
-            //    public required string ColourName { get; set; }
-            //};
-
-
-            //static void ShowLinq()
-            //{
-            //    lipstickNames.ForEach(x => { Console.WriteLine(x); });
-            //}
-
-            //static void Showfor()
-            //{
-            //    for (int i = 0; i < lipstickNames.Count; i++)
-            //    {
-            //        Console.WriteLine(lipstickNames[i]);
-            //    }
-            //}
-
-            //static void Showcontainswhile()
-            //{
-            //    int length = lipstickBrands.Count;
-            //    int position = 0;
-
-            //    while (position < length)
-            //    {
-            //        Console.WriteLine(lipstickBrands[position]);
-            //        position++;
-            //    }
-            //}
 
         }
 
@@ -139,18 +70,18 @@ namespace ProductManagement
         {
 
             Console.WriteLine("Please enter the brand: ");
-            string liptstickBrand = Console.ReadLine();
+            string lipstickBrand = Console.ReadLine();
 
             Console.WriteLine("Please enter the name: ");
-            string liptstickName = Console.ReadLine();
+            string lipstickName = Console.ReadLine();
 
             Console.WriteLine("Please enter the colour: ");
-            string liptstickColour = Console.ReadLine();
+            string lipstickColour = Console.ReadLine();
 
             Console.WriteLine("Please enter the price: ");
             decimal lipstickPrice = Convert.ToDecimal(Console.ReadLine());
 
-            var product = new LipstickProduct(liptstickName, liptstickBrand, liptstickColour, lipstickPrice);
+            var product = new LipstickProduct(lipstickName, lipstickBrand, lipstickColour, lipstickPrice);
             product.WriteToConsole();
 
             products.Add(product);
@@ -181,60 +112,50 @@ namespace ProductManagement
             var elementToEdit = products[position - 1];
 
             Console.WriteLine("Please enter the new brand: ");
-            string liptstickBrand = Console.ReadLine();
+            string lipstickBrand = Console.ReadLine();
 
             Console.WriteLine("Please enter the new name: ");
-            string liptstickName = Console.ReadLine();
+            string lipstickName = Console.ReadLine();
 
             Console.WriteLine("Please enter the new colour: ");
-            string liptstickColour = Console.ReadLine();
+            string lipstickColour = Console.ReadLine();
 
             Console.WriteLine("Please enter the new price: ");
             decimal lipstickPrice = Convert.ToDecimal(Console.ReadLine());
 
-            elementToEdit.LipstickName = liptstickName;
-            elementToEdit.LipstickBrand = liptstickBrand;
-            elementToEdit.LipstickColour = liptstickColour;
+            elementToEdit.LipstickName = lipstickName;
+            elementToEdit.LipstickBrand = lipstickBrand;
+            elementToEdit.LipstickColour = lipstickColour;
             elementToEdit.LipstickPrice = lipstickPrice;
         }
 
-        //static void Delete()
-        //{
-        //    Console.WriteLine("Please, enter the brand: ");
-        //    string removeInputBrands = Console.ReadLine();
+        static void Delete()
+        {
+            Show();
 
-        //    if (removeInputBrands == lipstickBrands[0])
-        //    {
+            Console.WriteLine("Please choose item to delete (input position number): ");
+            var position = Convert.ToInt32(Console.ReadLine());
 
-        //        lipstickBrands.Remove(removeInputBrands);
+            if (position == 0 || position > products.Count)
+            {
+                Console.WriteLine("This position is not allowed");
+                Edit();
+            }
 
-        //    }
+            var elementToDelete= products[position - 1];
 
-        //    Console.WriteLine("Please, enter the name: ");
-        //    string removeInputNames = Console.ReadLine();
-        //    if (removeInputNames == lipstickNames[0])
-        //    {
-        //        lipstickNames.Remove(removeInputNames);
+            products.Remove(elementToDelete);
 
-        //    }
+        
+            Console.WriteLine("The product has been successfully deleted\n");
+            
 
-        //    Console.WriteLine("Please, enter the colour: ");
-        //    string removeInputColours = Console.ReadLine();
-        //    if (removeInputColours == lipstickColours[0])
-        //    {
-        //        lipstickColours.Remove(removeInputColours);
+        }
 
-        //    }
-
-        //    Console.WriteLine("Please, enter the price: ");
-        //    decimal removeInputPrices = Convert.ToDecimal(Console.ReadLine());
-        //    if (removeInputPrices == lipstickPrices[0])
-        //    {
-        //        lipstickPrices.Remove(removeInputPrices);
-
-        //    }
-
-        //}
+        static void Close()
+        {
+            Environment.Exit(0);
+        }
 
     }
 
