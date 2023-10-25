@@ -12,7 +12,10 @@ namespace ProductManagement
 {
     internal class Program
     {
-        static List<LipstickProduct> products = new List<LipstickProduct>();
+        static List<Product> products = new List<Product>();
+        static List<Lipstick> lipstickproducts = new List<Lipstick>();
+        static List<Perfume> perfumeproducts = new List<Perfume>();
+
 
         static void Main(string[] args)
         {
@@ -34,7 +37,6 @@ namespace ProductManagement
 
 
 
-
                 switch (choice)
                 {
                     case "1":
@@ -49,7 +51,7 @@ namespace ProductManagement
                     case "4":
                         Delete();
                         break;
-                    case "5":
+                    case "´5":
                         Close();
                         break;
                     default:
@@ -64,27 +66,69 @@ namespace ProductManagement
 
 
         }
+        // User muss Auswahl zwischen Lippenstift oder Parfum auswählen
+        //Cases müssen seperat ablaufen
+        //static void Choose()
+        //{
+        //    string userChoice = Console.ReadLine();
+        //    if (userChoice == "Lipstick")
+        //    {
+
+        //    }
+        //    else if (userChoice == "Perfume")
+        //    { }
+        //    else
+        //    { };
 
 
-        static void Add()
+
+        //}
+
+        public static void Add()
         {
+            Console.WriteLine("Enter L for Lipstick or P for Perfume: ");
+            string userChoiceLipstick = "L";
+            string userChoicePerfume = "P";
+            string userChoice = Console.ReadLine();
+            
+            if (userChoice == userChoiceLipstick)
 
-            Console.WriteLine("Please enter the brand: ");
-            string lipstickBrand = Console.ReadLine();
+            {
+                var lipstickproduct = new Lipstick();
+                Lipstick.questionsAddLipstick(lipstickproduct);
+                //var lipstickproduct = new Lipstick(productCategory, productBrand, productName, productDefinition, productPrice, productColour);
+                lipstickproduct.WriteToConsole();
 
-            Console.WriteLine("Please enter the name: ");
-            string lipstickName = Console.ReadLine();
+                lipstickproducts.Add(lipstickproduct);
 
-            Console.WriteLine("Please enter the colour: ");
-            string lipstickColour = Console.ReadLine();
+            }
+            else if (userChoice == userChoicePerfume)
+            {
+                Console.WriteLine("Please enter the brand: ");
+                string productBrand = Console.ReadLine();
 
-            Console.WriteLine("Please enter the price: ");
-            decimal lipstickPrice = Convert.ToDecimal(Console.ReadLine());
+                Console.WriteLine("Please enter the name: ");
+                string productName = Console.ReadLine();
 
-            var product = new LipstickProduct(lipstickName, lipstickBrand, lipstickColour, lipstickPrice);
-            product.WriteToConsole();
+                Console.WriteLine("Please enter the definition: ");
+                string productDefinition = Console.ReadLine();
 
-            products.Add(product);
+                Console.WriteLine("Please enter the price: ");
+                decimal productPrice = Convert.ToDecimal(Console.ReadLine());
+
+                Console.WriteLine("Please enter the scent: ");
+                string productScent = Console.ReadLine();
+
+                var perfumeproduct = new Perfume(productBrand, productName, productDefinition, productPrice, productScent);
+                perfumeproduct.WriteToConsole();
+
+                perfumeproducts.Add(perfumeproduct);
+            }
+
+            else
+            {
+                Console.WriteLine("Invalid Input");
+            }
 
         }
 
@@ -94,7 +138,16 @@ namespace ProductManagement
             {
                 product.WriteToConsole();
             }
-        }
+                foreach (var lipstickproduct in lipstickproducts)
+                {
+                    lipstickproduct.WriteToConsole();
+                }
+
+                foreach (var perfumeproduct in perfumeproducts)
+                {
+                    perfumeproduct.WriteToConsole();
+                }
+            }
 
         static void Edit()
         {
@@ -112,21 +165,26 @@ namespace ProductManagement
             var elementToEdit = products[position - 1];
 
             Console.WriteLine("Please enter the new brand: ");
-            string lipstickBrand = Console.ReadLine();
+            string productBrand = Console.ReadLine();
 
             Console.WriteLine("Please enter the new name: ");
-            string lipstickName = Console.ReadLine();
+            string productName = Console.ReadLine();
 
             Console.WriteLine("Please enter the new colour: ");
-            string lipstickColour = Console.ReadLine();
+            string productColour = Console.ReadLine();
+
+            Console.WriteLine("Please enter the new definition: ");
+            string productDefinition = Console.ReadLine();
 
             Console.WriteLine("Please enter the new price: ");
-            decimal lipstickPrice = Convert.ToDecimal(Console.ReadLine());
+            decimal productPrice = Convert.ToDecimal(Console.ReadLine());
 
-            elementToEdit.LipstickName = lipstickName;
-            elementToEdit.LipstickBrand = lipstickBrand;
-            elementToEdit.LipstickColour = lipstickColour;
-            elementToEdit.LipstickPrice = lipstickPrice;
+            elementToEdit.ProductName = productName;
+            elementToEdit.ProductBrand = productBrand;
+            elementToEdit.ProductDefinition = productDefinition;
+            elementToEdit.ProductPrice = productPrice;
+            //elementToEdit.ProductColour = productColour;
+
         }
 
         static void Delete()

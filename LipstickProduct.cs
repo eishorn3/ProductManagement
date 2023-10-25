@@ -1,23 +1,24 @@
 ﻿using System;
 
-public class LipstickProduct
+public class Lipstick:Product
 {
-    public string LipstickName { get; set; }
-    public string LipstickBrand { get; set; }
-    public string LipstickColour { get; set; }
-    public decimal LipstickPrice { get; set; }
+    public string ProductColour { get; set; }
 
-    public LipstickProduct(string lipstickName, string lipstickBrand, string lipstickColour, decimal lipstickPrice)
+    public Lipstick(string productCategory, string productBrand, string productName, string productDefinition, decimal productPrice, string productColour):base (productCategory, productBrand, productName, productDefinition, productPrice)
     {
-        LipstickName = lipstickName;
-        LipstickBrand = lipstickBrand;
-        LipstickColour = lipstickColour;
-        LipstickPrice = lipstickPrice;
+        ProductColour = productColour;
     }
 
     public void WriteToConsole()
     {
-        Console.WriteLine($"LipstickName: {LipstickName}\t | \tLipstickBrand: {LipstickBrand}\t | \tLipstickColour: {LipstickColour}\t | \tLipstickPrice: {LipstickPrice}\t");
+        Console.WriteLine($"ProductName: {ProductName}\t | \tProductBrand: {ProductBrand}\t | \tProductDefinition: {ProductDefinition}\t | \tProductPrice: {ProductPrice}\t | \tProductColour: {ProductColour}\t");
     }
 
+    public void questionsAddLipstick()
+    {
+        questionsAdd();
+        Console.WriteLine("Please enter the new colour: ");
+        string productColour = Console.ReadLine();
+
+    }
 }
