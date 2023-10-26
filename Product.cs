@@ -7,9 +7,14 @@ public class Product
     public string ProductDefinition { get; set; }
     public decimal ProductPrice { get; set; }
 
-    public Product(string productCategor, string productBrand, string productName, string productDefinition, decimal productPrice)
+    public Product()
     {
-        ProductCategory = ProductCategory;
+        
+    }
+
+    public Product(string productCategory, string productBrand, string productName, string productDefinition, decimal productPrice)
+    {
+        ProductCategory = productCategory;
         ProductBrand = productBrand;
         ProductName = productName;
         ProductDefinition = productDefinition;

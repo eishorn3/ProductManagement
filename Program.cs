@@ -10,7 +10,7 @@ namespace ProductManagement
 
 
 {
-    internal class Program
+    public class Program
     {
         static List<Product> products = new List<Product>();
         static List<Lipstick> lipstickproducts = new List<Lipstick>();
@@ -95,11 +95,13 @@ namespace ProductManagement
 
             {
                 var lipstickproduct = new Lipstick();
-                Lipstick.questionsAddLipstick(lipstickproduct);
+                lipstickproduct.questionsAddLipstick();
+                
                 //var lipstickproduct = new Lipstick(productCategory, productBrand, productName, productDefinition, productPrice, productColour);
-                lipstickproduct.WriteToConsole();
-
+                lipstickproduct.LipstickWriteToConsole();
                 lipstickproducts.Add(lipstickproduct);
+
+
 
             }
             else if (userChoice == userChoicePerfume)
@@ -119,7 +121,8 @@ namespace ProductManagement
                 Console.WriteLine("Please enter the scent: ");
                 string productScent = Console.ReadLine();
 
-                var perfumeproduct = new Perfume(productBrand, productName, productDefinition, productPrice, productScent);
+                var perfumeproduct = new Perfume();
+                perfumeproduct.questionsAddPerfume();
                 perfumeproduct.WriteToConsole();
 
                 perfumeproducts.Add(perfumeproduct);

@@ -4,7 +4,13 @@ public class Perfume : Product
 {
     public string ProductScent { get; set; }
 
-    public Perfume(string productCategory, string productBrand, string productName, string productDefinition, decimal productPrice, string productScent) : base(productCategory, productBrand, productName, productDefinition, productPrice)
+    public Perfume()
+    {
+        
+    }
+
+    public Perfume(string productCategory, string productBrand, string productName, string productDefinition, decimal productPrice, string productScent)
+        : base(productCategory, productBrand, productName, productDefinition, productPrice)
     {
         ProductScent = productScent;
     }
@@ -15,9 +21,10 @@ public class Perfume : Product
     }
     public void questionsAddPerfume()
     {
-        questionsAdd();
+        base.questionsAdd();
         Console.WriteLine("Please enter the scent: ");
         string productScent = Console.ReadLine();
+        ProductScent = productScent; 
 
     }
 }
