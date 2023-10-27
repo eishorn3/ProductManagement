@@ -1,21 +1,10 @@
-﻿using Microsoft.VisualBasic.FileIO;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Channels;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace ProductManagement
+﻿namespace ProductManagement
 
 
 {
     public class Program
     {
         static List<Product> products = new List<Product>();
-        static List<Lipstick> lipstickproducts = new List<Lipstick>();
-        static List<Perfume> perfumeproducts = new List<Perfume>();
-
 
         static void Main(string[] args)
         {
@@ -90,16 +79,16 @@ namespace ProductManagement
             string userChoiceLipstick = "L";
             string userChoicePerfume = "P";
             string userChoice = Console.ReadLine();
-            
+
             if (userChoice == userChoiceLipstick)
 
             {
                 var lipstickproduct = new Lipstick();
                 lipstickproduct.questionsAddLipstick();
-                
+
                 //var lipstickproduct = new Lipstick(productCategory, productBrand, productName, productDefinition, productPrice, productColour);
                 lipstickproduct.LipstickWriteToConsole();
-                lipstickproducts.Add(lipstickproduct);
+                products.Add(lipstickproduct);
 
 
 
@@ -125,7 +114,7 @@ namespace ProductManagement
                 perfumeproduct.questionsAddPerfume();
                 perfumeproduct.WriteToConsole();
 
-                perfumeproducts.Add(perfumeproduct);
+                products.Add(perfumeproduct);
             }
 
             else
@@ -141,16 +130,7 @@ namespace ProductManagement
             {
                 product.WriteToConsole();
             }
-                foreach (var lipstickproduct in lipstickproducts)
-                {
-                    lipstickproduct.WriteToConsole();
-                }
-
-                foreach (var perfumeproduct in perfumeproducts)
-                {
-                    perfumeproduct.WriteToConsole();
-                }
-            }
+        }
 
         static void Edit()
         {
@@ -166,27 +146,14 @@ namespace ProductManagement
             }
 
             var elementToEdit = products[position - 1];
+            /*
+             * TODO
+             * Hier werden nur die Properties von der Mutterklasse Product erfasst.
+             * Wie könnte man hier die spezifischen Properties ebenfalls erfassen?
+             * Tipp: Typprüfung
+             */
 
-            Console.WriteLine("Please enter the new brand: ");
-            string productBrand = Console.ReadLine();
-
-            Console.WriteLine("Please enter the new name: ");
-            string productName = Console.ReadLine();
-
-            Console.WriteLine("Please enter the new colour: ");
-            string productColour = Console.ReadLine();
-
-            Console.WriteLine("Please enter the new definition: ");
-            string productDefinition = Console.ReadLine();
-
-            Console.WriteLine("Please enter the new price: ");
-            decimal productPrice = Convert.ToDecimal(Console.ReadLine());
-
-            elementToEdit.ProductName = productName;
-            elementToEdit.ProductBrand = productBrand;
-            elementToEdit.ProductDefinition = productDefinition;
-            elementToEdit.ProductPrice = productPrice;
-            //elementToEdit.ProductColour = productColour;
+            elementToEdit.questionsAdd();
 
         }
 
@@ -203,13 +170,13 @@ namespace ProductManagement
                 Edit();
             }
 
-            var elementToDelete= products[position - 1];
+            var elementToDelete = products[position - 1];
 
             products.Remove(elementToDelete);
 
-        
+
             Console.WriteLine("The product has been successfully deleted\n");
-            
+
 
         }
 

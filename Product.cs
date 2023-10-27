@@ -1,7 +1,6 @@
-﻿using System;
-
-public class Product
-{   public string ProductCategory {  get; set; }
+﻿public class Product
+{
+    public string ProductCategory { get; set; }
     public string ProductBrand { get; set; }
     public string ProductName { get; set; }
     public string ProductDefinition { get; set; }
@@ -9,7 +8,7 @@ public class Product
 
     public Product()
     {
-        
+
     }
 
     public Product(string productCategory, string productBrand, string productName, string productDefinition, decimal productPrice)
@@ -28,19 +27,19 @@ public class Product
     public void questionsAdd()
     {
         Console.WriteLine("Please enter the category: ");
-        string productCategory = Console.ReadLine();
+        ProductCategory = Console.ReadLine();
 
         Console.WriteLine("Please enter the brand: ");
-        string productBrand = Console.ReadLine();
+        ProductBrand = Console.ReadLine();
 
         Console.WriteLine("Please enter the name: ");
-        string productName = Console.ReadLine();
+        ProductName = Console.ReadLine();
 
         Console.WriteLine("Please enter the definition: ");
-        string productDefinition = Console.ReadLine();
+        ProductDefinition = Console.ReadLine();
 
         Console.WriteLine("Please enter the price: ");
-        decimal productPrice = Convert.ToDecimal(Console.ReadLine());
+        ProductPrice = Convert.ToDecimal(Console.ReadLine());
     }
 }
 
