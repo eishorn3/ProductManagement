@@ -1,4 +1,8 @@
-﻿public class Product
+﻿using Newtonsoft.Json;
+using System;
+
+[Serializable]
+public class Product
 {
     public string ProductCategory { get; set; }
     public string ProductBrand { get; set; }
@@ -41,6 +45,8 @@
         Console.WriteLine("Please enter the price: ");
         ProductPrice = Convert.ToDecimal(Console.ReadLine());
     }
+
+
 }
 
 

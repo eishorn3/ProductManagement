@@ -13,4 +13,8 @@
     <Compile Remove="ProductClass.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.13" />
+  </ItemGroup>
+
 </Project>

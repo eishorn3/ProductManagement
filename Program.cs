@@ -1,4 +1,9 @@
-﻿namespace ProductManagement
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+
+namespace ProductManagement
 
 
 {
@@ -9,6 +14,8 @@
         static void Main(string[] args)
         {
 
+
+
             while (true)
             {
                 Console.WriteLine("Hey! Welcome to our Douglas Prodcut Management Site.");
@@ -17,6 +24,8 @@
                 Console.WriteLine("3: Edit a product");
                 Console.WriteLine("4: Delete a product");
                 Console.WriteLine("5: Close the Product Manager");
+                Console.WriteLine("6: Save Changes");
+
 
                 Console.WriteLine("Choose an option: ");
 
@@ -40,8 +49,11 @@
                     case "4":
                         Delete();
                         break;
-                    case "´5":
+                    case "5":
                         Close();
+                        break;
+                    case "6":
+                        Save();
                         break;
                     default:
                         Console.WriteLine("Sorry, wrong input");
@@ -90,25 +102,13 @@
                 lipstickproduct.LipstickWriteToConsole();
                 products.Add(lipstickproduct);
 
+          
+
 
 
             }
             else if (userChoice == userChoicePerfume)
             {
-                Console.WriteLine("Please enter the brand: ");
-                string productBrand = Console.ReadLine();
-
-                Console.WriteLine("Please enter the name: ");
-                string productName = Console.ReadLine();
-
-                Console.WriteLine("Please enter the definition: ");
-                string productDefinition = Console.ReadLine();
-
-                Console.WriteLine("Please enter the price: ");
-                decimal productPrice = Convert.ToDecimal(Console.ReadLine());
-
-                Console.WriteLine("Please enter the scent: ");
-                string productScent = Console.ReadLine();
 
                 var perfumeproduct = new Perfume();
                 perfumeproduct.questionsAddPerfume();
@@ -121,7 +121,7 @@
             {
                 Console.WriteLine("Invalid Input");
             }
-
+     
         }
 
         static void Show()
@@ -146,6 +146,16 @@
             }
 
             var elementToEdit = products[position - 1];
+
+            if (elementToEdit is Lipstick lipstickproduct)
+            {
+                lipstickproduct.questionsAddLipstick();
+            }
+            else if (elementToEdit is Perfume perfumeproduct) 
+            {
+                perfumeproduct.questionsAddPerfume();
+            }
+            else { 
             /*
              * TODO
              * Hier werden nur die Properties von der Mutterklasse Product erfasst.
@@ -154,7 +164,7 @@
              */
 
             elementToEdit.questionsAdd();
-
+            }
         }
 
         static void Delete()
@@ -179,11 +189,26 @@
 
 
         }
+        static void Save()
+        {
+#pragma warning disable SYSLIB0011
 
+            FileStream stream = new FileStream(@"C:\Users\j.glomb\Documents\ProductFiles\productobjects.txt", FileMode.Create, FileAccess.Write);
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, products);
+            stream.Close();
+
+            stream = new FileStream(@"C:\Users\j.glomb\Documents\ProductFiles\productobjects.txt", FileMode.Open, FileAccess.Read);
+            Product productsRead = (Product)formatter.Deserialize(stream);
+            Console.WriteLine(productsRead);
+            Console.WriteLine(products[])
+        }
         static void Close()
         {
             Environment.Exit(0);
         }
+
+
 
     }
 
