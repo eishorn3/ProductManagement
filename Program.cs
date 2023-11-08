@@ -2,6 +2,8 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using System.Runtime.Serialization;
 
 namespace ProductManagement
 
@@ -25,6 +27,7 @@ namespace ProductManagement
                 Console.WriteLine("4: Delete a product");
                 Console.WriteLine("5: Close the Product Manager");
                 Console.WriteLine("6: Save Changes");
+                Console.WriteLine("7: Load Products");
 
 
                 Console.WriteLine("Choose an option: ");
@@ -54,6 +57,9 @@ namespace ProductManagement
                         break;
                     case "6":
                         Save();
+                        break;
+                    case "7":
+                        Load();
                         break;
                     default:
                         Console.WriteLine("Sorry, wrong input");
@@ -102,7 +108,7 @@ namespace ProductManagement
                 lipstickproduct.LipstickWriteToConsole();
                 products.Add(lipstickproduct);
 
-          
+
 
 
 
@@ -121,7 +127,7 @@ namespace ProductManagement
             {
                 Console.WriteLine("Invalid Input");
             }
-     
+
         }
 
         static void Show()
@@ -151,19 +157,19 @@ namespace ProductManagement
             {
                 lipstickproduct.questionsAddLipstick();
             }
-            else if (elementToEdit is Perfume perfumeproduct) 
+            else if (elementToEdit is Perfume perfumeproduct)
             {
                 perfumeproduct.questionsAddPerfume();
             }
-            else { 
-            /*
-             * TODO
-             * Hier werden nur die Properties von der Mutterklasse Product erfasst.
-             * Wie könnte man hier die spezifischen Properties ebenfalls erfassen?
-             * Tipp: Typprüfung
-             */
+            else {
+                /*
+                 * TODO
+                 * Hier werden nur die Properties von der Mutterklasse Product erfasst.
+                 * Wie könnte man hier die spezifischen Properties ebenfalls erfassen?
+                 * Tipp: Typprüfung
+                 */
 
-            elementToEdit.questionsAdd();
+                elementToEdit.questionsAdd();
             }
         }
 
@@ -198,12 +204,19 @@ namespace ProductManagement
             formatter.Serialize(stream, products);
             stream.Close();
 
-            stream = new FileStream(@"C:\Users\j.glomb\Documents\ProductFiles\productobjects.txt", FileMode.Open, FileAccess.Read);
-            Product productsRead = (Product)formatter.Deserialize(stream);
-            Console.WriteLine(productsRead);
-            Console.WriteLine(products[])
+
         }
-        static void Close()
+        static void Load()
+        {
+            object productLoad = null;
+            FileStream filestream;
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            filestream = File.OpenRead(@"C:\Users\j.glomb\Documents\ProductFiles\productobjects.txt");
+            productLoad = formatter.Deserialize(filestream);
+            filestream.Close();
+        }
+                static void Close()
         {
             Environment.Exit(0);
         }
