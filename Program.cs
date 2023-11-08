@@ -74,24 +74,8 @@ namespace ProductManagement
 
 
         }
-        // User muss Auswahl zwischen Lippenstift oder Parfum auswählen
-        //Cases müssen seperat ablaufen
-        //static void Choose()
-        //{
-        //    string userChoice = Console.ReadLine();
-        //    if (userChoice == "Lipstick")
-        //    {
 
-        //    }
-        //    else if (userChoice == "Perfume")
-        //    { }
-        //    else
-        //    { };
-
-
-
-        //}
-
+  
         public static void Add()
         {
             Console.WriteLine("Enter L for Lipstick or P for Perfume: ");
@@ -103,12 +87,10 @@ namespace ProductManagement
 
             {
                 var lipstickproduct = new Lipstick();
-                lipstickproduct.questionsAddLipstick();
+                lipstickproduct.questionsAdd();
 
-                //var lipstickproduct = new Lipstick(productCategory, productBrand, productName, productDefinition, productPrice, productColour);
-                lipstickproduct.LipstickWriteToConsole();
+                lipstickproduct.WriteToConsole();
                 products.Add(lipstickproduct);
-
 
 
 
@@ -118,10 +100,11 @@ namespace ProductManagement
             {
 
                 var perfumeproduct = new Perfume();
-                perfumeproduct.questionsAddPerfume();
+                perfumeproduct.questionsAdd();
                 perfumeproduct.WriteToConsole();
 
                 products.Add(perfumeproduct);
+               
             }
 
             else
@@ -154,14 +137,14 @@ namespace ProductManagement
 
             var elementToEdit = products[position - 1];
 
-            if (elementToEdit is Lipstick lipstickproduct)
+            if (elementToEdit is Lipstick lipstickproduct || elementToEdit is Perfume perfumeproduct)
             {
-                lipstickproduct.questionsAddLipstick();
+                elementToEdit.questionsAdd();
             }
-            else if (elementToEdit is Perfume perfumeproduct)
-            {
-                perfumeproduct.questionsAddPerfume();
-            }
+            //else if (elementToEdit is Perfume perfumeproduct)
+            //{
+            //    perfumeproduct.questionsAdd();
+            //}
             else {
                 /*
                  * TODO
@@ -169,8 +152,8 @@ namespace ProductManagement
                  * Wie könnte man hier die spezifischen Properties ebenfalls erfassen?
                  * Tipp: Typprüfung
                  */
-
-                elementToEdit.questionsAdd();
+                Console.WriteLine("Invalid Input");
+                //elementToEdit.questionsAdd();
             }
         }
 

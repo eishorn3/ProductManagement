@@ -16,16 +16,18 @@ public class Perfume : Product
         ProductScent = productScent;
     }
 
-    public void WriteToConsole()
+    public override void WriteToConsole()
     {
-        Console.WriteLine($"ProductName: {ProductName}\t | \tProductBrand: {ProductBrand}\t | \tProductDefinition: {ProductDefinition}\t | \tProductPrice: {ProductPrice}\t | \tProductScent: {ProductScent}\t");
+        base.WriteToConsole();
+        Console.WriteLine($"ProductScent: {ProductScent}\t");
     }
-    public void questionsAddPerfume()
+
+    public override void questionsAdd()
     {
         base.questionsAdd();
         Console.WriteLine("Please enter the scent: ");
         string productScent = Console.ReadLine();
-        ProductScent = productScent; 
+        ProductScent = productScent;
 
     }
 }

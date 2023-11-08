@@ -15,17 +15,19 @@ public class Lipstick : Product
         ProductColour = productColour;
     }
 
-    public void LipstickWriteToConsole()
+    public override void WriteToConsole()
     {
-        WriteToConsole();
+        base.WriteToConsole();
         Console.WriteLine($"ProductColour: {ProductColour}\t");
     }
 
-    public void questionsAddLipstick()
+
+    public override void questionsAdd() 
     {
-        questionsAdd();
+        base.questionsAdd();
         Console.WriteLine("Please enter the new colour: ");
         string productColour = Console.ReadLine();
         ProductColour = productColour;
+
     }
 }

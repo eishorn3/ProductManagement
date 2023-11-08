@@ -23,12 +23,12 @@ public class Product
         ProductDefinition = productDefinition;
         ProductPrice = productPrice;
     }
-    public void WriteToConsole()
+    public virtual void WriteToConsole()
     {
         Console.WriteLine($"ProductCategory: {ProductCategory}\t | \tProductName: {ProductName}\t | \tProductBrand: {ProductBrand}\t | \tProductDefinition: {ProductDefinition}\t | \tProductPrice: {ProductPrice}\t");
     }
 
-    public void questionsAdd()
+    public virtual void questionsAdd()
     {
         Console.WriteLine("Please enter the category: ");
         ProductCategory = Console.ReadLine();
