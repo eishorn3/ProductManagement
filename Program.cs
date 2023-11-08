@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Runtime.Serialization;
+using System.IO.Pipes;
 
 namespace ProductManagement
 
@@ -208,13 +209,11 @@ namespace ProductManagement
         }
         static void Load()
         {
-            object productLoad = null;
-            FileStream filestream;
+            FileStream filestream = File.OpenRead(@"C:\Users\j.glomb\Documents\ProductFiles\productobjects.txt");
             BinaryFormatter formatter = new BinaryFormatter();
-
-            filestream = File.OpenRead(@"C:\Users\j.glomb\Documents\ProductFiles\productobjects.txt");
-            productLoad = formatter.Deserialize(filestream);
+            products = (List<Product>)formatter.Deserialize(filestream);
             filestream.Close();
+            Show();
         }
                 static void Close()
         {
