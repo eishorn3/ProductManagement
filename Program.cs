@@ -210,41 +210,19 @@ namespace ProductManagement
 
         static void JSONSave()
         {
-            //string jsonstring = JsonSerializer.Serialize(products);(SortedDicn0onary)
-            //JsonSerializer serializer = new JsonSerializer();
-            //StreamWriter sw = new StreamWriter(@"C:\Users\j.glomb\Documets\ProductFiles\jsonproduct.objects.txt");
-            //JsonWriter writer = new JsonTextWriter(sw);
-            //{
-            //    serializer.Serialize(writer, List<Product>, roducts));
-            //    // {"ExpiryDate":new Date(1230375600000),"Price":0}
-            //}
-
-            //string fileName = "ProductObjects.json";
-
-            ////var json = JsonConvert.SerializeObject(products);
-            //FileStream filestream = File.OpenRead(@"C:\Users\j.glomb\Documents\ProductFiles\ProductObjects.json");
-            ////FileStream fileStream = File.OpenRead(@"C:\Users\j.glomb\Documents\ProductFiles\productobjects.txt")
-            //var jsonString = JsonConvert.SerializeObject(products);
-            //File.WriteAllText(fileName, jsonString);
-            //filestream.Close(); <----- all this time could have been saved if I'd just replaced the motherfuckin' Newtonsoftshit with Text JSon yaiiii :D
-            var jsonString = JsonSerializer.Serialize(products);
-            File.WriteAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.txt", jsonString);
+            var properties = new JsonSerializerOptions {IncludeFields = true};
+            var jsonString = JsonSerializer.Serialize(products, properties);
+            File.WriteAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.json", jsonString);
 
 
 
         }
         static void JSONLoad()
         {
-            //FileStream stream = File.OpenRead(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.txt");
-            //JsonSerializer.Deserialize<T>(products);
-            string jsonString = File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.txt");
-            //List<Product> products = JsonDeserializer()
-            //JsonSerializer.Deserialize<List<Product>>(jsonString);
-            //Show();
-
-            List<Product> products = JsonSerializer.Deserialize<List<Product>>(jsonString);
-
-
+            var properties = new JsonSerializerOptions { IncludeFields = true };
+            string jsonString = File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.json");
+            List<Product>products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
+            Show();
         }
 
     }

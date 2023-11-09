@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Text.Json.Serialization;
+
 [Serializable]
 
 public class Perfume : Product
 {
+    [JsonInclude]
     public string ProductScent { get; set; }
 
     public Perfume()

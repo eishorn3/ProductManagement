@@ -1,20 +1,22 @@
 ﻿using System;
+using System.Text.Json.Serialization;
+
 [Serializable]
 
 public class Lipstick : Product
 {
+    [JsonInclude]
     public string ProductColour { get; set; }
-
+   
     public Lipstick()
     {
         
     }
-
     public Lipstick(string productCategory, string productBrand, string productName, string productDefinition, decimal productPrice, string productColour) : base(productCategory, productBrand, productName, productDefinition, productPrice)
     {
         ProductColour = productColour;
     }
-
+   
     public override void WriteToConsole()
     {
         base.WriteToConsole();
