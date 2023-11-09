@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Text.Json.Serialization;
 
 [Serializable]
 public class Product
 {
+    [JsonInclude]
     public string ProductCategory { get; set; }
     public string ProductBrand { get; set; }
     public string ProductName { get; set; }

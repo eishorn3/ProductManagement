@@ -6,6 +6,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.IO.Pipes;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ProductManagement
 
@@ -212,7 +213,7 @@ namespace ProductManagement
         {
             var properties = new JsonSerializerOptions {IncludeFields = true};
             var jsonString = JsonSerializer.Serialize(products, properties);
-            File.WriteAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.json", jsonString);
+            File.WriteAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.txt", jsonString);
 
 
 
@@ -220,8 +221,9 @@ namespace ProductManagement
         static void JSONLoad()
         {
             var properties = new JsonSerializerOptions { IncludeFields = true };
-            string jsonString = File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.json");
+            string jsonString = File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.txt");
             List<Product>products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
+            //JsonConverter<List<Product> vllt converten?;
             Show();
         }
 
