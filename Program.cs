@@ -1,12 +1,5 @@
-﻿using System.Text.Json;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Xml.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-using System.Runtime.Serialization;
-using System.IO.Pipes;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
 
 namespace ProductManagement
 
@@ -85,7 +78,7 @@ namespace ProductManagement
 
         }
 
-  
+
         public static void Add()
         {
             Console.WriteLine("Enter L for Lipstick or P for Perfume: ");
@@ -114,7 +107,7 @@ namespace ProductManagement
                 perfumeproduct.WriteToConsole();
 
                 products.Add(perfumeproduct);
-               
+
             }
 
             else
@@ -152,7 +145,8 @@ namespace ProductManagement
                 elementToEdit.questionsAdd();
             }
 
-            else {
+            else
+            {
                 /*
                  * TODO
                  * Hier werden nur die Properties von der Mutterklasse Product erfasst.
@@ -204,16 +198,16 @@ namespace ProductManagement
             filestream.Close();
             Show();
         }
-                static void Close()
+        static void Close()
         {
             Environment.Exit(0);
         }
 
         static void JSONSave()
         {
-            var properties = new JsonSerializerOptions {IncludeFields = true};
+            var properties = new JsonSerializerOptions { IncludeFields = true };
             var jsonString = JsonSerializer.Serialize(products, properties);
-            File.WriteAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.txt", jsonString);
+            File.WriteAllText("jsonproductobjects.json", jsonString);
 
 
 
@@ -221,8 +215,8 @@ namespace ProductManagement
         static void JSONLoad()
         {
             var properties = new JsonSerializerOptions { IncludeFields = true };
-            string jsonString = File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.txt");
-            List<Product>products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
+            string jsonString = File.ReadAllText("jsonproductobjects.json");
+            products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
             //JsonConverter<List<Product> vllt converten?;
             Show();
         }
