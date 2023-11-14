@@ -1,13 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
+[JsonDerivedType(typeof(Lipstick), typeDiscriminator: "L")]
+[JsonDerivedType(typeof(Perfume), typeDiscriminator: "P")]
 [Serializable]
-
-
 public class Product
 {
-    [JsonInclude]
     public string ProductCategory { get; set; }
     public string ProductBrand { get; set; }
     public string ProductName { get; set; }

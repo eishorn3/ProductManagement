@@ -1,23 +1,17 @@
-﻿using System;
-using System.Text.Json.Serialization;
-
-[Serializable]
-
+﻿[Serializable]
 public class Lipstick : Product
 {
-    [JsonInclude]
-    [JsonPropertyName("productcolour")]
     public string ProductColour { get; set; }
-   
+
     public Lipstick()
     {
-        
+
     }
     public Lipstick(string productCategory, string productBrand, string productName, string productDefinition, decimal productPrice, string productColour) : base(productCategory, productBrand, productName, productDefinition, productPrice)
     {
         ProductColour = productColour;
     }
-   
+
     public override void WriteToConsole()
     {
         base.WriteToConsole();
@@ -25,7 +19,7 @@ public class Lipstick : Product
     }
 
 
-    public override void questionsAdd() 
+    public override void questionsAdd()
     {
         base.questionsAdd();
         Console.WriteLine("Please enter the new colour: ");

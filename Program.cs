@@ -1,6 +1,6 @@
 ﻿//using System.Text.Json;
-using Newtonsoft.Json;
 using System.Runtime.Serialization.Formatters.Binary;
+
 //using System.Text.Json;
 
 namespace ProductManagement
@@ -207,8 +207,12 @@ namespace ProductManagement
 
 
                 //}
-                JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-                File.WriteAllText("newy.json", JsonConvert.SerializeObject(products, settings));
+
+
+
+                //JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+                File.WriteAllText("newy.json", System.Text.Json.JsonSerializer.Serialize(products));
+
 
                 //static void JSONLoad()
                 //{
@@ -291,14 +295,16 @@ namespace ProductManagement
             //var res = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\newy.txt"));
             //string json = JsonConvert.DeserializeObject(File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\newy.txt"));
             //Console.WriteLine(res);
-            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
-            var products2 = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("newy.json"), settings);
+            //JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+
+            var products2 = System.Text.Json.JsonSerializer.Deserialize<List<Product>>(File.ReadAllText("newy.json"));
             foreach (var item in products2)
             {
                 item.WriteToConsole();
             }
 
+            products = products2;
         }
 
     }

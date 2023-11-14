@@ -1,8 +1,6 @@
-﻿using System;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 [Serializable]
-
 public class Perfume : Product
 {
     [JsonInclude]
@@ -11,7 +9,7 @@ public class Perfume : Product
 
     public Perfume()
     {
-        
+
     }
 
     public Perfume(string productCategory, string productBrand, string productName, string productDefinition, decimal productPrice, string productScent)
