@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+﻿//using System.Text.Json;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -7,6 +7,9 @@ using System.Runtime.Serialization;
 using System.IO.Pipes;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using System.Security.Cryptography.X509Certificates;
+//using System.Text.Json;
 
 namespace ProductManagement
 
@@ -14,9 +17,9 @@ namespace ProductManagement
 {
     public class Program
     {
-        static List<Product> products = new List<Product>();
+        public static List<Product> products = new List<Product>();
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
 
 
@@ -85,7 +88,7 @@ namespace ProductManagement
 
         }
 
-  
+
         public static void Add()
         {
             Console.WriteLine("Enter L for Lipstick or P for Perfume: ");
@@ -114,7 +117,7 @@ namespace ProductManagement
                 perfumeproduct.WriteToConsole();
 
                 products.Add(perfumeproduct);
-               
+
             }
 
             else
@@ -124,7 +127,7 @@ namespace ProductManagement
 
         }
 
-        static void Show()
+        public static void Show()
         {
             foreach (var product in products)
             {
@@ -132,7 +135,7 @@ namespace ProductManagement
             }
         }
 
-        static void Edit()
+        public static void Edit()
         {
             Show();
 
@@ -152,7 +155,8 @@ namespace ProductManagement
                 elementToEdit.questionsAdd();
             }
 
-            else {
+            else
+            {
                 /*
                  * TODO
                  * Hier werden nur die Properties von der Mutterklasse Product erfasst.
@@ -163,7 +167,7 @@ namespace ProductManagement
             }
         }
 
-        static void Delete()
+        public static void Delete()
         {
             Show();
 
@@ -185,7 +189,7 @@ namespace ProductManagement
 
 
         }
-        static void Save()
+        public static void Save()
         {
 #pragma warning disable SYSLIB0011
 
@@ -195,8 +199,9 @@ namespace ProductManagement
             stream.Close();
 
 
+
         }
-        static void Load()
+        public static void Load()
         {
             FileStream filestream = File.OpenRead(@"C:\Users\j.glomb\Documents\ProductFiles\productobjects.txt");
             BinaryFormatter formatter = new BinaryFormatter();
@@ -204,62 +209,129 @@ namespace ProductManagement
             filestream.Close();
             Show();
         }
-                static void Close()
+        static void Close()
         {
             Environment.Exit(0);
         }
 
-        static void JSONSave()
+        public static void JSONSave()
         {
-            var properties = new JsonSerializerOptions {IncludeFields = true};
-            var jsonString = JsonSerializer.Serialize(products, properties);
-            File.WriteAllText(path: "jsonproductobjects.json", jsonString);
-
-
-
-
-        }
-        //static void JSONLoad()
-        //{
-        //    var properties = new JsonSerializerOptions { IncludeFields = true };
-        //    string jsonString = File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.txt");
-        //    List<Product>products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
-        //    //JsonConverter<List<Product> vllt converten?;
-        //    Show();
-
-
-
-
-            //static void JSONSave()
-            //{
-            //    var properties = new JsonSerializerOptions { IncludeFields = true };
-            //    var jsonString = JsonSerializer.Serialize(products, properties);
-            //    File.WriteAllText("jsonproductobjects.json", jsonString);
-
-
-
-            //}
-            //static void JSONLoad()
-            //{
-            //    var properties = new JsonSerializerOptions { IncludeFields = true };
-            //    string jsonString = File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.txt");
-            //    List<Product> products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
-            //    string jsonString = File.ReadAllText("jsonproductobjects.json");
-            //    products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
-            //    //JsonConverter<List<Product> vllt converten?;
-            //    Show();
-            //}
-            static void JSONLoad()
             {
-                var properties = new JsonSerializerOptions { IncludeFields = true };
-                string jsonString = File.ReadAllText(path: "jsonproductobjects.json");
-                products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
-                //JsonConverter<List<Product> vllt converten?;
-                Show();
+                JsonSerializer serializer = new JsonSerializer();
+                string json = JsonConvert.SerializeObject(products);
+                using (StreamWriter file = File.CreateText("newy.txt"))
+                {
+                    JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+                    string Serialized = JsonConvert.SerializeObject(products, settings);
+                    Console.WriteLine(Serialized);
+
+                    //var properties = new JsonSerializerOptions {IncludeFields = true, WriteIndented = true };
+                    //var jsonString = JsonSerializer.Serialize(products, properties);
+                    //Console.WriteLine(jsonString);
+                    //FileStream createStream = File.Create(path: "jsonproductobjects.json");
+                    //        JsonSerializer serializer = new JsonSerializer();
+                    //JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All};
+                    //string Serialized = JsonConvert.SerializeObject(products, settings);    
+                    //Console.WriteLine(Serialized);
+
+
+                }
+                File.WriteAllText("newy.txt", JsonConvert.SerializeObject(products));
+
+                //static void JSONLoad()
+                //{
+                //    var properties = new JsonSerializerOptions { IncludeFields = true };
+                //    string jsonString = File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.txt");
+                //    List<Product>products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
+                //    //JsonConverter<List<Product> vllt converten?;
+                //    Show();
+
+
+
+
+                //static void JSONSave()
+                //{
+                //    var properties = new JsonSerializerOptions { IncludeFields = true };
+                //    var jsonString = JsonSerializer.Serialize(products, properties);
+                //    File.WriteAllText("jsonproductobjects.json", jsonString);
+
+
+
+                //}
+                //static void JSONLoad()
+                //{
+                //    var properties = new JsonSerializerOptions { IncludeFields = true };
+                //    string jsonString = File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\jsonproductobjects.txt");
+                //    List<Product> products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
+                //    string jsonString = File.ReadAllText("jsonproductobjects.json");
+                //    products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
+                //    //JsonConverter<List<Product> vllt converten?;
+                //    Show();
+                // //}
+                //public static void JSONLoad()
+                // {
+                // FileStream createStream = File.Create(path: "jsonproductobjects.json");
+                // JsonSerializer serializer = new JsonSerializer();
+                // JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+                // string Serialized = JsonConvert.SerializeObject(products, settings);
+                // Console.WriteLine(Serialized);
+                // List<Product> deserializedList = JsonConvert.DeserializeObject<List<Product>>(Serialized, settings);
+
+                //var properties = new JsonSerializerOptions { IncludeFields = true,
+                //    WriteIndented = true
+                //    };
+
+                //string jsonString = File.ReadAllText(path: "jsonproductobjects.json");
+                //products = JsonSerializer.Deserialize<List<Product>>(jsonString, properties);
+                ////JsonConverter<List<Product> vllt converten?;
+                //Show();
+
+                //P value = JsonSerializer.Deserialize<List<Product>>(jsonString);
+                //Console.WriteLine(value is Product);
             }
 
-        //}
+            //}
+           
+
+        }
+        public static void JSONLoad()
+        {
+            //JsonDeserializer deserializer = new JsonDeserializer();
+            //string json = JsonConvert.DeserializeObject(products);
+            //using (StreamWriter file = File.CreateText(@"C:\Users\j.glomb\Documents\ProductFiles\newy.txt"))
+            //{
+            //    JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            //    string Serialized = JsonConvert.SerializeObject(products, settings);
+            //    Console.WriteLine(Serialized);
+
+            //    //var properties = new JsonSerializerOptions {IncludeFields = true, WriteIndented = true };
+            //    //var jsonString = JsonSerializer.Serialize(products, properties);
+            //    //Console.WriteLine(jsonString);
+            //    //FileStream createStream = File.Create(path: "jsonproductobjects.json");
+            //    //        JsonSerializer serializer = new JsonSerializer();
+            //    //JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All};
+            //    //string Serialized = JsonConvert.SerializeObject(products, settings);    
+            //    //Console.WriteLine(Serialized);
+
+
+            //}
+            //File.WriteAllText(@"C:\Users\j.glomb\Documents\ProductFiles\newy.txt", JsonConvert.SerializeObject(products));
+            //var res = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\newy.txt"));
+            //string json = JsonConvert.DeserializeObject(File.ReadAllText(@"C:\Users\j.glomb\Documents\ProductFiles\newy.txt"));
+            //Console.WriteLine(res);
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+
+            using (StreamReader file = File.OpenText("newy.txt"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                var products2 = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("newy.txt"), settings);
+                foreach (var item in products2)
+                {
+                    item.WriteToConsole();
+                }
+            }
+        }
+
 
     }
-
 }

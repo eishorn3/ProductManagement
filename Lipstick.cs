@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 public class Lipstick : Product
 {
     [JsonInclude]
+    [JsonPropertyName("productcolour")]
     public string ProductColour { get; set; }
    
     public Lipstick()

@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 public class Perfume : Product
 {
     [JsonInclude]
+    [JsonPropertyName("productScent")]
     public string ProductScent { get; set; }
 
     public Perfume()

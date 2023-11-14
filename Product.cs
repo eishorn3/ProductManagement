@@ -3,7 +3,9 @@ using System;
 using System.Text.Json.Serialization;
 
 [Serializable]
-public abstract class Product
+
+
+public class Product
 {
     [JsonInclude]
     public string ProductCategory { get; set; }
