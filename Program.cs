@@ -1,14 +1,6 @@
 ﻿//using System.Text.Json;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Xml.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-using System.Runtime.Serialization;
-using System.IO.Pipes;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
 using Newtonsoft.Json;
-using System.Security.Cryptography.X509Certificates;
+using System.Runtime.Serialization.Formatters.Binary;
 //using System.Text.Json;
 
 namespace ProductManagement
@@ -21,9 +13,6 @@ namespace ProductManagement
 
         public static void Main(string[] args)
         {
-
-
-
             while (true)
             {
                 Console.WriteLine("Hey! Welcome to our Douglas Prodcut Management Site.");
@@ -37,14 +26,9 @@ namespace ProductManagement
                 Console.WriteLine("8: Save Changes in JSON");
                 Console.WriteLine("9: Load Products from JSON");
 
-
                 Console.WriteLine("Choose an option: ");
 
-
-
                 string choice = Console.ReadLine();
-
-
 
                 switch (choice)
                 {
@@ -82,10 +66,6 @@ namespace ProductManagement
 
                 Console.WriteLine("\n");
             }
-
-
-
-
         }
 
 
@@ -105,26 +85,20 @@ namespace ProductManagement
                 lipstickproduct.WriteToConsole();
                 products.Add(lipstickproduct);
 
-
-
-
             }
             else if (userChoice == userChoicePerfume)
             {
-
                 var perfumeproduct = new Perfume();
                 perfumeproduct.questionsAdd();
                 perfumeproduct.WriteToConsole();
 
                 products.Add(perfumeproduct);
-
             }
 
             else
             {
                 Console.WriteLine("Invalid Input");
             }
-
         }
 
         public static void Show()
@@ -184,10 +158,7 @@ namespace ProductManagement
 
             products.Remove(elementToDelete);
 
-
             Console.WriteLine("The product has been successfully deleted\n");
-
-
         }
         public static void Save()
         {
@@ -291,7 +262,7 @@ namespace ProductManagement
             }
 
             //}
-           
+
 
         }
         public static void JSONLoad()
@@ -331,7 +302,6 @@ namespace ProductManagement
                 }
             }
         }
-
 
     }
 }
