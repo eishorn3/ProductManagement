@@ -188,26 +188,27 @@ namespace ProductManagement
         public static void JSONSave()
         {
             {
-                JsonSerializer serializer = new JsonSerializer();
-                string json = JsonConvert.SerializeObject(products);
-                using (StreamWriter file = File.CreateText("newy.txt"))
-                {
-                    JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-                    string Serialized = JsonConvert.SerializeObject(products, settings);
-                    Console.WriteLine(Serialized);
+                //JsonSerializer serializer = new JsonSerializer();
+                //string json = JsonConvert.SerializeObject(products);
+                //using (StreamWriter file = File.CreateText("newy.txt"))
+                //{
+                //    JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+                //    string Serialized = JsonConvert.SerializeObject(products, settings);
+                //    Console.WriteLine(Serialized);
 
-                    //var properties = new JsonSerializerOptions {IncludeFields = true, WriteIndented = true };
-                    //var jsonString = JsonSerializer.Serialize(products, properties);
-                    //Console.WriteLine(jsonString);
-                    //FileStream createStream = File.Create(path: "jsonproductobjects.json");
-                    //        JsonSerializer serializer = new JsonSerializer();
-                    //JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All};
-                    //string Serialized = JsonConvert.SerializeObject(products, settings);    
-                    //Console.WriteLine(Serialized);
+                //    //var properties = new JsonSerializerOptions {IncludeFields = true, WriteIndented = true };
+                //    //var jsonString = JsonSerializer.Serialize(products, properties);
+                //    //Console.WriteLine(jsonString);
+                //    //FileStream createStream = File.Create(path: "jsonproductobjects.json");
+                //    //        JsonSerializer serializer = new JsonSerializer();
+                //    //JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All};
+                //    //string Serialized = JsonConvert.SerializeObject(products, settings);    
+                //    //Console.WriteLine(Serialized);
 
 
-                }
-                File.WriteAllText("newy.txt", JsonConvert.SerializeObject(products));
+                //}
+                JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+                File.WriteAllText("newy.json", JsonConvert.SerializeObject(products, settings));
 
                 //static void JSONLoad()
                 //{
@@ -292,15 +293,12 @@ namespace ProductManagement
             //Console.WriteLine(res);
             JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
-            using (StreamReader file = File.OpenText("newy.txt"))
+            var products2 = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("newy.json"), settings);
+            foreach (var item in products2)
             {
-                JsonSerializer serializer = new JsonSerializer();
-                var products2 = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("newy.txt"), settings);
-                foreach (var item in products2)
-                {
-                    item.WriteToConsole();
-                }
+                item.WriteToConsole();
             }
+
         }
 
     }
