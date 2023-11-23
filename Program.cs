@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization.Formatters.Binary;
+﻿using Newtonsoft.Json;
 
 namespace ProductManagement
 
@@ -6,13 +6,13 @@ namespace ProductManagement
 {
     public class Program
     {
-        public static List<Product> products = new List<Product>();
+        public static List<IProduct> products = new List<IProduct>();
 
         public static void Main(string[] args)
         {
             while (true)
             {
-                Load();
+                var load = new JsonLoad();
                 DisplayUserOptions();
                 string choice = Console.ReadLine();
 
@@ -31,18 +31,6 @@ namespace ProductManagement
                         Delete();
                         break;
                     case "5":
-                        Save();
-                        break;
-                    case "6":
-                        Load();
-                        break;
-                    case "7":
-                        JSONSave();
-                        break;
-                    case "8":
-                        JSONLoad();
-                        break;
-                    case "9":
                         Close();
                         break;
                     default:
@@ -62,10 +50,6 @@ namespace ProductManagement
             Console.WriteLine("3: Edit a product");
             Console.WriteLine("4: Delete a product");
             Console.WriteLine("5: Close the Product Manager");
-            Console.WriteLine("6: Save Changes");
-            Console.WriteLine("7: Load Products");
-            Console.WriteLine("8: Save Changes in JSON");
-            Console.WriteLine("9: Load Products from JSON");
 
             Console.WriteLine("Choose an option: ");
         }
@@ -79,17 +63,17 @@ namespace ProductManagement
             if (userChoice == "L")
 
             {
-                var lipstickproduct = new Lipstick();
-                lipstickproduct.questionsAdd();
-                lipstickproduct.WriteToConsole();
-                products.Add(lipstickproduct);
+                var lipstick = new Lipstick();
+                lipstick.QuestionsAdd();
+                lipstick.WriteToConsole();
+                products.Add(lipstick);
             }
             else if (userChoice == "P")
             {
-                var perfumeproduct = new Perfume();
-                perfumeproduct.questionsAdd();
-                perfumeproduct.WriteToConsole();
-                products.Add(perfumeproduct);
+                var perfume = new Perfume();
+                perfume.QuestionsAdd();
+                perfume.WriteToConsole();
+                products.Add(perfume);
             }
 
             else
@@ -123,7 +107,7 @@ namespace ProductManagement
 
             if (elementToEdit is Lipstick lipstickproduct || elementToEdit is Perfume perfumeproduct)
             {
-                elementToEdit.questionsAdd();
+                elementToEdit.QuestionsAdd();
             }
 
             else
@@ -151,49 +135,16 @@ namespace ProductManagement
 
             Console.WriteLine("The product has been successfully deleted\n");
         }
-        public static void Save()
-        {
-#pragma warning disable SYSLIB0011
-
-            FileStream stream = new FileStream(@"C:\Users\j.glomb\Documents\ProductFiles\productobjects.txt", FileMode.Create, FileAccess.Write);
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, products);
-            stream.Close();
+        
 
 
-
-        }
-        public static void Load()
-        {
-            FileStream filestream = File.OpenRead(@"C:\Users\j.glomb\Documents\ProductFiles\productobjects.txt");
-            BinaryFormatter formatter = new BinaryFormatter();
-            products = (List<Product>)formatter.Deserialize(filestream);
-            filestream.Close();
-            Show();
-        }
         static void Close()
         {
+            var save = new JsonSave(products);
             Environment.Exit(0);
         }
 
-        public static void JSONSave()
-        {
-            {
-                File.WriteAllText("newy.json", System.Text.Json.JsonSerializer.Serialize(products));
-            }
-
-        }
-
-        public static void JSONLoad()
-        {
-            var products2 = System.Text.Json.JsonSerializer.Deserialize<List<Product>>(File.ReadAllText("newy.json"));
-            foreach (var item in products2)
-            {
-                item.WriteToConsole();
-            }
-
-            products = products2;
-        }
+     
 
     }
 }
