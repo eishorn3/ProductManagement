@@ -4,22 +4,23 @@ namespace ProductManagement
 
 
 {
-    public class Program
+    public class Program 
     {
-        public static List<IProduct> products = new List<IProduct>();
+        public static IList<Product> products = new List<Product>();
 
         public static void Main(string[] args)
         {
             while (true)
             {
                 var load = new JsonLoad();
+                load.ToString();
                 DisplayUserOptions();
                 string choice = Console.ReadLine();
 
                 switch (choice)
                 {
                     case "1":
-                        Add();
+                        Addd();
                         break;
                     case "2":
                         Show();
@@ -54,24 +55,21 @@ namespace ProductManagement
             Console.WriteLine("Choose an option: ");
         }
 
-        public static void Add()
+        public void Addd()
         {
 
             Console.WriteLine("Enter L for Lipstick or P for Perfume: ");
             string userChoice = Console.ReadLine();
 
             if (userChoice == "L")
-
-            {
-                var lipstick = new Lipstick();
-                lipstick.QuestionsAdd();
-                lipstick.WriteToConsole();
-                products.Add(lipstick);
+                
+            {   Lipstick lipstick = new Lipstick();
+               lipstick.AddTo();
             }
             else if (userChoice == "P")
             {
                 var perfume = new Perfume();
-                perfume.QuestionsAdd();
+                perfume.questionsAdd();
                 perfume.WriteToConsole();
                 products.Add(perfume);
             }
@@ -107,7 +105,7 @@ namespace ProductManagement
 
             if (elementToEdit is Lipstick lipstickproduct || elementToEdit is Perfume perfumeproduct)
             {
-                elementToEdit.QuestionsAdd();
+                elementToEdit.questionsAdd();
             }
 
             else

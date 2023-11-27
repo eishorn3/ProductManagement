@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO.Enumeration;
 
-public class JsonSave: List<IProduct>
+public class JsonSave
 {
-    public JsonSave(List<IProduct> products)
+    public JsonSave(IList<Product> products)
 	{ 
         {
             File.WriteAllText("newy.json", System.Text.Json.JsonSerializer.Serialize(products));
