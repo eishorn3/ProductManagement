@@ -1,4 +1,0 @@
-﻿interface IAddTo
-{
-    void AddTo();
-}

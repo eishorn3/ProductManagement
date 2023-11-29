@@ -1,36 +1,20 @@
 ﻿[Serializable]
-public class Lipstick : Product, IAddTo
+public class Lipstick : Product
 {
-    public string ProductColour { get; set; }
+    public string? ProductColour { get; set; }
 
-    public Lipstick()
+    public override string ToString()
     {
-
-    }
-    public Lipstick(string productCategory, string productBrand, string productName, string productDefinition, decimal productPrice, string productColour) : base(productCategory, productBrand, productName, productDefinition, productPrice)
-    {
-        ProductColour = productColour;
+        return base.ToString() + $"\tProductColour: {ProductColour}\n";
     }
 
-    public override void WriteToConsole()
-    {
-        base.WriteToConsole();
-        Console.WriteLine($"ProductColour: {ProductColour}\t");
-    }
+    //public override void questionsAdd()
+    //{
+    //    base.questionsAdd();
+    //    Console.WriteLine("Please enter the new colour: ");
+    //    string productColour = Console.ReadLine();
+    //    ProductColour = productColour;
 
+    //}
 
-    public override void questionsAdd()
-    {
-        base.questionsAdd();
-        Console.WriteLine("Please enter the new colour: ");
-        string productColour = Console.ReadLine();
-        ProductColour = productColour;
-
-    }
-
-    public void AddTo()
-    {
-        this.questionsAdd();
-        this.WriteToConsole();
-    }
 }

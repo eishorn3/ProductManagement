@@ -4,7 +4,7 @@
 {
     public class Program
     {
-        public static IList<Product> products = new List<Product>();
+        private IProductRepository _repository = new ProductRepository();
 
         public static void Main(string[] args)
         {
@@ -86,7 +86,7 @@
         {
             foreach (var product in products)
             {
-                product.WriteToConsole();
+                Console.WriteLine(product);
             }
         }
 
