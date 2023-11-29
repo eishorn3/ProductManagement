@@ -30,10 +30,7 @@ public class Lipstick : Product, IAddTo
 
     public void AddTo()
     {
-        IList<Product> products = new List<Product>();
-        Lipstick lipstick = new Lipstick();
-        lipstick.questionsAdd();
-        lipstick.WriteToConsole();
-        products.Add(lipstick);
+        this.questionsAdd();
+        this.WriteToConsole();
     }
 }

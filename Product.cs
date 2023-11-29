@@ -1,5 +1,7 @@
-﻿using System;
+﻿using System.Text.Json.Serialization;
 
+[JsonDerivedType(typeof(Lipstick), typeDiscriminator: "L")]
+[JsonDerivedType(typeof(Perfume), typeDiscriminator: "P")]
 public class Product
 {
     public string ProductCategory { get; set; }

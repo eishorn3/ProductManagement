@@ -1,6 +1,4 @@
-﻿using System;
-
-interface IAddTo
+﻿interface IAddTo
 {
-	void AddTo();
+    void AddTo();
 }

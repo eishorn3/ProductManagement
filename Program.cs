@@ -1,19 +1,18 @@
-﻿using Newtonsoft.Json;
-
-namespace ProductManagement
+﻿namespace ProductManagement
 
 
 {
-    public class Program 
+    public class Program
     {
         public static IList<Product> products = new List<Product>();
 
         public static void Main(string[] args)
         {
+            var load = new JsonLoad();
+            products = load.LoadProducts();
+
             while (true)
             {
-                var load = new JsonLoad();
-                load.ToString();
                 DisplayUserOptions();
                 string choice = Console.ReadLine();
 
@@ -55,16 +54,19 @@ namespace ProductManagement
             Console.WriteLine("Choose an option: ");
         }
 
-        public void Addd()
+        public static void Addd()
         {
 
             Console.WriteLine("Enter L for Lipstick or P for Perfume: ");
             string userChoice = Console.ReadLine();
 
             if (userChoice == "L")
-                
-            {   Lipstick lipstick = new Lipstick();
-               lipstick.AddTo();
+
+            {
+                Lipstick lipstick = new Lipstick();
+                lipstick.AddTo();
+                lipstick.WriteToConsole();
+                products.Add(lipstick);
             }
             else if (userChoice == "P")
             {
@@ -102,16 +104,7 @@ namespace ProductManagement
             }
 
             var elementToEdit = products[position - 1];
-
-            if (elementToEdit is Lipstick lipstickproduct || elementToEdit is Perfume perfumeproduct)
-            {
-                elementToEdit.questionsAdd();
-            }
-
-            else
-            {
-                Console.WriteLine("Invalid Input");
-            }
+            elementToEdit.questionsAdd();
         }
 
         public static void Delete()
@@ -133,7 +126,7 @@ namespace ProductManagement
 
             Console.WriteLine("The product has been successfully deleted\n");
         }
-        
+
 
 
         static void Close()
@@ -142,7 +135,7 @@ namespace ProductManagement
             Environment.Exit(0);
         }
 
-     
+
 
     }
 }

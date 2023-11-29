@@ -1,17 +1,17 @@
-﻿using System;
-using System.Text.Json;
-public class JsonLoad
+﻿public class JsonLoad
 {
-	public JsonLoad()
-	{
-        if (File.Exists("newy.json")){ 
-        var products2 = System.Text.Json.JsonSerializer.Deserialize<IList<Product>>(File.ReadAllText("newy.json"));
-        foreach (var item in products2)
+    public IList<Product> LoadProducts()
+    {
+        if (File.Exists("newy.json"))
         {
-            item.WriteToConsole();
+            var products2 = System.Text.Json.JsonSerializer.Deserialize<IList<Product>>(File.ReadAllText("newy.json"));
+            foreach (var item in products2)
+            {
+                item.WriteToConsole();
+            }
+            return products2;
         }
-        }
-        else { Console.WriteLine("NOOOOOOO"); }
 
+        return new List<Product>();
     }
 }
