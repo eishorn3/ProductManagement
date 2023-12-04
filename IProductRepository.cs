@@ -2,6 +2,7 @@
 
 public interface IProductRepository
 {
-    void Add();
+    void Add(Product product);
+    void AddRange(IEnumerable<Product> products);
     IEnumerable<Product> GetProducts();
 }

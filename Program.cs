@@ -1,141 +1,134 @@
-﻿namespace ProductManagement
+﻿namespace ProductManagement;
 
-
+public class Program
 {
-    public class Program
+    private static IProductRepository _repository = new ProductRepository();
+    private static IInputService _inputService = new InputService();
+
+    public static void Main(string[] args)
     {
-        private IProductRepository _repository = new ProductRepository();
+        var load = new JsonLoad();
+        var products = load.LoadProducts();
+        _repository.AddRange(products);
 
-        public static void Main(string[] args)
+        while (true)
         {
-            var load = new JsonLoad();
-            products = load.LoadProducts();
+            DisplayUserOptions();
+            string choice = Console.ReadLine();
 
-            while (true)
+            switch (choice)
             {
-                DisplayUserOptions();
-                string choice = Console.ReadLine();
-
-                switch (choice)
-                {
-                    case "1":
-                        Addd();
-                        break;
-                    case "2":
-                        Show();
-                        break;
-                    case "3":
-                        Edit();
-                        break;
-                    case "4":
-                        Delete();
-                        break;
-                    case "5":
-                        Close();
-                        break;
-                    default:
-                        Console.WriteLine("Sorry, wrong input");
-                        break;
-                }
-
-                Console.WriteLine("\n");
-            }
-        }
-
-        private static void DisplayUserOptions()
-        {
-            Console.WriteLine("Hey! Welcome to our Douglas Prodcut Management Site.");
-            Console.WriteLine("1: Add a product");
-            Console.WriteLine("2: Show a product");
-            Console.WriteLine("3: Edit a product");
-            Console.WriteLine("4: Delete a product");
-            Console.WriteLine("5: Close the Product Manager");
-
-            Console.WriteLine("Choose an option: ");
-        }
-
-        public static void Addd()
-        {
-
-            Console.WriteLine("Enter L for Lipstick or P for Perfume: ");
-            string userChoice = Console.ReadLine();
-
-            if (userChoice == "L")
-
-            {
-                Lipstick lipstick = new Lipstick();
-                lipstick.AddTo();
-                lipstick.WriteToConsole();
-                products.Add(lipstick);
-            }
-            else if (userChoice == "P")
-            {
-                var perfume = new Perfume();
-                perfume.questionsAdd();
-                perfume.WriteToConsole();
-                products.Add(perfume);
+                case "1":
+                    Addd();
+                    break;
+                case "2":
+                    Show();
+                    break;
+                case "3":
+                    Edit();
+                    break;
+                case "4":
+                    Delete();
+                    break;
+                case "5":
+                    Close();
+                    break;
+                default:
+                    Console.WriteLine("Sorry, wrong input");
+                    break;
             }
 
-            else
-            {
-                Console.WriteLine("Invalid Input");
-            }
+            Console.WriteLine("\n");
         }
+    }
 
-        public static void Show()
+    private static void DisplayUserOptions()
+    {
+        Console.WriteLine("Hey! Welcome to our Douglas Prodcut Management Site.");
+        Console.WriteLine("1: Add a product");
+        Console.WriteLine("2: Show a product");
+        Console.WriteLine("3: Edit a product");
+        Console.WriteLine("4: Delete a product");
+        Console.WriteLine("5: Close the Product Manager");
+
+        Console.WriteLine("Choose an option: ");
+    }
+
+    public static void Addd()//
+    {
+        Console.WriteLine("Enter L for Lipstick or P for Perfume: ");
+        string userChoice = Console.ReadLine();
+
+        if (userChoice == "L")
+
         {
-            foreach (var product in products)
-            {
-                Console.WriteLine(product);
-            }
+            Lipstick lipstick = new Lipstick();
+            lipstick.AddTo();
+            lipstick.WriteToConsole();
+            product.Add(lipstick);
         }
-
-        public static void Edit()
+        else if (userChoice == "P")
         {
-            Show();
-
-            Console.WriteLine("Please choose item to edit (input position number): ");
-            var position = Convert.ToInt32(Console.ReadLine());
-
-            if (position == 0 || position > products.Count)
-            {
-                Console.WriteLine("This position is not allowed");
-                Edit();
-            }
-
-            var elementToEdit = products[position - 1];
-            elementToEdit.questionsAdd();
+            var perfume = new Perfume();
+            perfume.questionsAdd();
+            perfume.WriteToConsole();
+            products.Add(perfume);
         }
 
-        public static void Delete()
+        else
         {
-            Show();
-
-            Console.WriteLine("Please choose item to delete (input position number): ");
-            var position = Convert.ToInt32(Console.ReadLine());
-
-            if (position == 0 || position > products.Count)
-            {
-                Console.WriteLine("This position is not allowed");
-                Edit();
-            }
-
-            var elementToDelete = products[position - 1];
-
-            products.Remove(elementToDelete);
-
-            Console.WriteLine("The product has been successfully deleted\n");
+            Console.WriteLine("Invalid Input");
         }
+    }
 
-
-
-        static void Close()
+    public static void Show()
+    {
+        foreach (var product in products)
         {
-            var save = new JsonSave(products);
-            Environment.Exit(0);
+            Console.WriteLine(product);
+        }
+    }
+
+    public static void Edit()//
+    {
+        Show();
+
+        Console.WriteLine("Please choose item to edit (input position number): ");
+        var position = Convert.ToInt32(Console.ReadLine());
+
+        if (position == 0 || position > products.Count)
+        {
+            Console.WriteLine("This position is not allowed");
+            Edit();
         }
 
+        var elementToEdit = products[position - 1];
+        elementToEdit.questionsAdd();
+    }
 
+    public static void Delete()//
+    {
+        Show();
 
+        Console.WriteLine("Please choose item to delete (input position number): ");
+        var position = Convert.ToInt32(Console.ReadLine());
+
+        if (position == 0 || position > products.Count)
+        {
+            Console.WriteLine("This position is not allowed");
+            Edit();
+        }
+
+        var elementToDelete = products[position - 1];
+
+        products.Remove(elementToDelete);
+
+        Console.WriteLine("The product has been successfully deleted\n");
+    }
+
+    static void Close()
+    {
+        var save = new JsonSave(products);
+        Environment.Exit(0);
     }
 }

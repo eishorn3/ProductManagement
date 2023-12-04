@@ -2,32 +2,22 @@
 
 public class ProductRepository : IProductRepository
 {
-    private IList<Product> _products = new List<Product>();
+    private List<Product> _products = new List<Product>();
 
-    public void Add()
+    public void Add(Product product)
     {
-        var product = new Product();
-
-        Console.WriteLine("Please enter the category: ");
-        product.ProductCategory = Console.ReadLine();
-
-        Console.WriteLine("Please enter the brand: ");
-        product.ProductBrand = Console.ReadLine();
-
-        Console.WriteLine("Please enter the name: ");
-        product.ProductName = Console.ReadLine();
-
-        Console.WriteLine("Please enter the definition: ");
-        product.ProductDefinition = Console.ReadLine();
-
-        Console.WriteLine("Please enter the price: ");
-        product.ProductPrice = Convert.ToDecimal(Console.ReadLine());
-
         _products.Add(product);
+    }
+
+    public void AddRange(IEnumerable<Product> products)
+    {
+        _products.AddRange(products);
     }
 
     public IEnumerable<Product> GetProducts()
     {
         return _products;
     }
+
+
 }
