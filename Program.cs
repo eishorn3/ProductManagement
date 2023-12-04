@@ -54,32 +54,32 @@ public class Program
         Console.WriteLine("Choose an option: ");
     }
 
-    public static void Addd()//
-    {
-        Console.WriteLine("Enter L for Lipstick or P for Perfume: ");
-        string userChoice = Console.ReadLine();
+    //public static void Addd()//
+    //{
+    //    Console.WriteLine("Enter L for Lipstick or P for Perfume: ");
+    //    string userChoice = Console.ReadLine();
 
-        if (userChoice == "L")
+    //    if (userChoice == "L")
 
-        {
-            Lipstick lipstick = new Lipstick();
-            lipstick.AddTo();
-            lipstick.WriteToConsole();
-            product.Add(lipstick);
-        }
-        else if (userChoice == "P")
-        {
-            var perfume = new Perfume();
-            perfume.questionsAdd();
-            perfume.WriteToConsole();
-            products.Add(perfume);
-        }
+    //    {
+    //        Lipstick lipstick = new Lipstick();
+    //        lipstick.AddTo();
+    //        lipstick.WriteToConsole();
+    //        product.Add(lipstick);
+    //    }
+    //    else if (userChoice == "P")
+    //    {
+    //        var perfume = new Perfume();
+    //        perfume.questionsAdd();
+    //        perfume.WriteToConsole();
+    //        products.Add(perfume);
+    //    }
 
-        else
-        {
-            Console.WriteLine("Invalid Input");
-        }
-    }
+    //    else
+    //    {
+    //        Console.WriteLine("Invalid Input");
+    //    }
+    //}
 
     public static void Show()
     {
@@ -89,22 +89,22 @@ public class Program
         }
     }
 
-    public static void Edit()//
-    {
-        Show();
+    //public static void Edit()//
+    //{
+    //    Show();
 
-        Console.WriteLine("Please choose item to edit (input position number): ");
-        var position = Convert.ToInt32(Console.ReadLine());
+    //    Console.WriteLine("Please choose item to edit (input position number): ");
+    //    var position = Convert.ToInt32(Console.ReadLine());
 
-        if (position == 0 || position > products.Count)
-        {
-            Console.WriteLine("This position is not allowed");
-            Edit();
-        }
+    //    if (position == 0 || position > products.Count)
+    //    {
+    //        Console.WriteLine("This position is not allowed");
+    //        Edit();
+    //    }
 
-        var elementToEdit = products[position - 1];
-        elementToEdit.questionsAdd();
-    }
+    //    var elementToEdit = products[position - 1];
+    //    elementToEdit.questionsAdd();
+    //}
 
     public static void Delete()//
     {
