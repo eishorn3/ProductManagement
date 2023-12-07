@@ -1,8 +1,8 @@
 ﻿//[JsonDerivedType(typeof(Lipstick), typeDiscriminator: "L")]
 //[JsonDerivedType(typeof(Perfume), typeDiscriminator: "P")]
-public class Product : IProduct
+public abstract class Product : IProduct
 {
-    public string? ProductCategory { get; set; }
+    public virtual string? ProductCategory { get; }
     public string? ProductBrand { get; set; }
     public string? ProductName { get; set; }
     public string? ProductDefinition { get; set; }

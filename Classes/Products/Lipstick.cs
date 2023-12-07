@@ -1,7 +1,13 @@
 ﻿[Serializable]
-public class Lipstick : Product, IProduct, ILipstickService
+public class Lipstick : Product, IProduct
 {
     public string? ProductColour { get; set; }
+    public override string? ProductCategory { get; } = nameof(Lipstick);
+
+    public override string ToString()
+    {
+        return base.ToString() + $"\tProductColour: {ProductColour}\n";
+    }
 
     //public void AddProduct()
     //{
@@ -12,15 +18,7 @@ public class Lipstick : Product, IProduct, ILipstickService
     //{
 
     //}
-    public Lipstick CreateLipsticktInput()
-    {
-        var lipstick = new Lipstick();
 
-        Console.WriteLine("Please enter the colour: ");
-        lipstick.ProductColour = Console.ReadLine();
-
-        return lipstick;
-    }
     //public Lipstick CreateLipsticktInput()
     //{
     //    var lipstick = new Lipstick();
@@ -54,10 +52,7 @@ public class Lipstick : Product, IProduct, ILipstickService
 //    //    throw new NotImplementedException();
 //    //}
 
-//    //public override string ToString()
-//    //{
-//    //    return base.ToString() + $"\tProductColour: {ProductColour}\n";
-//    //}
+
 
 //    //dynamic IInputService.AddProduct()
 //    //{

@@ -1,11 +1,7 @@
 ﻿public class InputService : IInputService
 {
-    public Product CreateProductInput()
+    public Product CreateProductInput(Product product)
     {
-        Product product = new Product();
-        Console.WriteLine("Please enter the category: ");
-        product.ProductCategory = Console.ReadLine();
-
         Console.WriteLine("Please enter the brand: ");
         product.ProductBrand = Console.ReadLine();
 
@@ -19,6 +15,7 @@
         product.ProductPrice = Convert.ToDecimal(Console.ReadLine());
 
         return product;
+
     }
 
     //    private static IUserChoice _userChoice = new UserChoice();
@@ -70,6 +67,24 @@
         Console.WriteLine("5: Close the Product Manager");
         Console.WriteLine("Choose an option: ");
         UserChoice userChoice = new UserChoice();
+
+    }
+
+
+    public Product EditProduct()
+    {
+        List<Product> products = new List<Product>();
+
+        Console.WriteLine("Please choose item to edit (input position number): ");
+        var position = Convert.ToInt32(Console.ReadLine());
+
+        if (position == 0 || position >= products.Count)
+        {
+            Console.WriteLine("This position is not allowed");
+        }
+
+        var elementToEdit = products[position - 1];
+        return elementToEdit;
 
     }
 

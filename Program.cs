@@ -5,7 +5,7 @@ public class Program
     private static IInputService _inputService = new InputService();
     public static IUserChoice _userChoice = new UserChoice();
     public static IProductRepository _productRepository = new ProductRepository();
-    public static ILipstickService _lipstickService = new LipstickService();
+    public static ILipstickService _lipstickService = new LipstickService(_inputService);
     //private static IInputService _inputService = new InputService();
     //private static IJsonSaveLoadService _saveLoad = new JsonSaveLoadService();
     public static void Main(string[] args)
@@ -32,27 +32,35 @@ public class Program
                 case 2:
                     EditProduct();
                     break;
+                case 3:
+                    ShowProduct();
+                    break;
                 default:
                     break;
 
                     void CreateProduct()
                     {
-                        Product product = new Product();
-                        product = _inputService.CreateProductInput();
-                        _productRepository.Add(product);
-
-                        if (product.ProductCategory == "Lipstick" || product.ProductCategory == "lipstick")
+                        Console.WriteLine("Please enter the category: ");
+                        var input = Console.ReadLine();
+                        if (input == "Lipstick" || input == "lipstick")
                         {
-                            Lipstick lipstick = new Lipstick();
-                            lipstick = _lipstickService.CreateLipsticktInput();
+                            var lipstick = _lipstickService.CreateLipsticktInput();
                             _productRepository.Add(lipstick);
                         }
 
                     }
                     void EditProduct()
                     {
+                        _productRepository.GetProducts();
                     }
+                    void ShowProduct()
+                    {
+                        foreach (var item in _productRepository.GetProducts())
+                        {
+                            Console.WriteLine(item);
+                        }
 
+                    }
             }
 
         }
