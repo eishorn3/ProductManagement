@@ -1,4 +1,8 @@
-﻿namespace ProductManagement;
+﻿using ProductManagement.Classes;
+using ProductManagement.Classes.Services;
+using ProductManagement.Interfaces;
+
+namespace ProductManagement;
 
 public class Program
 {
@@ -42,7 +46,7 @@ public class Program
                     {
                         Console.WriteLine("Please enter the category: ");
                         var input = Console.ReadLine();
-                        if (input == "Lipstick" || input == "lipstick")
+                        if (input?.ToLowerInvariant() == "lipstick")
                         {
                             var lipstick = _lipstickService.CreateLipsticktInput();
                             _productRepository.Add(lipstick);

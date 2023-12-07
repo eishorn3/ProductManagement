@@ -1,4 +1,6 @@
-﻿public interface IProduct
+﻿namespace ProductManagement.Interfaces;
+
+public interface IProduct
 {
     string? ProductCategory { get; }
     string? ProductBrand { get; set; }

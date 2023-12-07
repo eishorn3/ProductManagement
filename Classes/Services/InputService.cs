@@ -1,4 +1,9 @@
-﻿public class InputService : IInputService
+﻿using ProductManagement.Classes.Products;
+using ProductManagement.Interfaces;
+
+namespace ProductManagement.Classes.Services;
+
+public class InputService : IInputService
 {
     public Product CreateProductInput(Product product)
     {

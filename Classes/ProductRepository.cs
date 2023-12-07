@@ -1,4 +1,7 @@
-﻿namespace ProductManagement;
+﻿using ProductManagement.Classes.Products;
+using ProductManagement.Interfaces;
+
+namespace ProductManagement.Classes;
 
 public class ProductRepository : IProductRepository
 {

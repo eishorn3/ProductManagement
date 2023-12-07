@@ -1,4 +1,9 @@
-﻿//[JsonDerivedType(typeof(Lipstick), typeDiscriminator: "L")]
+﻿using ProductManagement.Interfaces;
+using System.Text.Json.Serialization;
+
+namespace ProductManagement.Classes.Products;
+
+[JsonDerivedType(typeof(Lipstick), typeDiscriminator: "L")]
 //[JsonDerivedType(typeof(Perfume), typeDiscriminator: "P")]
 public abstract class Product : IProduct
 {

@@ -1,4 +1,9 @@
-﻿public class LipstickService : Lipstick, ILipstickService
+﻿using ProductManagement.Classes.Products;
+using ProductManagement.Interfaces;
+
+namespace ProductManagement;
+
+public class LipstickService : Lipstick, ILipstickService
 {
     private readonly IInputService inputService;
 

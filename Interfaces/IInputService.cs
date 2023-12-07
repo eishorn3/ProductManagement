@@ -1,4 +1,8 @@
-﻿public interface IInputService
+﻿using ProductManagement.Classes.Products;
+
+namespace ProductManagement.Interfaces;
+
+public interface IInputService
 {
     public Product CreateProductInput(Product product);
     //    Product DeleteInput(IList<Product> products);

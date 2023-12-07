@@ -1,4 +1,8 @@
-﻿[Serializable]
+﻿using ProductManagement.Interfaces;
+
+namespace ProductManagement.Classes.Products;
+
+[Serializable]
 public class Lipstick : Product, IProduct
 {
     public string? ProductColour { get; set; }

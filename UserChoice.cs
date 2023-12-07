@@ -1,4 +1,6 @@
-﻿public class UserChoice : IUserChoice
+﻿namespace ProductManagement;
+
+public class UserChoice : IUserChoice
 {
     public string choiceOne()
     {
