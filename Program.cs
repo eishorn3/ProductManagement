@@ -44,8 +44,7 @@ public class Program
 
                     void CreateProduct()
                     {
-                        Console.WriteLine("Please enter the category: ");
-                        var input = Console.ReadLine();
+                        var input = _userChoice.choiceOne();
                         if (input?.ToLowerInvariant() == "lipstick")
                         {
                             var lipstick = _lipstickService.CreateLipsticktInput();
@@ -55,7 +54,14 @@ public class Program
                     }
                     void EditProduct()
                     {
-                        _productRepository.GetProducts();
+                        foreach (var item in _productRepository.GetProducts())
+                        {
+                            Console.WriteLine(item);
+                        }
+
+                        var position = _userChoice.choiceTwo();
+
+                        if (position <= 0 || position >= _products.Count) { Console.WriteLine("BLA"); return null; }
                     }
                     void ShowProduct()
                     {

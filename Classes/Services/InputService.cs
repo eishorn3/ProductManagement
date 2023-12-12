@@ -78,12 +78,10 @@ public class InputService : IInputService
 
     public Product EditProduct()
     {
-        List<Product> products = new List<Product>();
-
         Console.WriteLine("Please choose item to edit (input position number): ");
         var position = Convert.ToInt32(Console.ReadLine());
 
-        if (position == 0 || position >= products.Count)
+        if (position == 0 || position >= _productRepository.Count)
         {
             Console.WriteLine("This position is not allowed");
         }
@@ -92,6 +90,8 @@ public class InputService : IInputService
         return elementToEdit;
 
     }
+
+
 
     //void IInputService.DisplayUserOptions()
     //{
