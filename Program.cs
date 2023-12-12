@@ -60,20 +60,45 @@ public class Program
                         }
 
                         var position = _userChoice.choiceTwo();
-
-                        if (position <= 0 || position >= _products.Count) { Console.WriteLine("BLA"); return null; }
-                    }
-                    void ShowProduct()
-                    {
-                        foreach (var item in _productRepository.GetProducts())
+                        var products = _productRepository.GetProducts();
+                        var chean = _productRepository.GetProducts().Count();
+                        if (position == 0 || position >= _productRepository.GetProducts().Count())
                         {
-                            Console.WriteLine(item);
+                            Console.WriteLine("bla");
+                            return;
                         }
 
+
+                        var elementToEdit = products[position - 1];
+
+                        //    Show();
+
+                        //    Console.WriteLine("Please choose item to edit (input position number): ");
+                        //    var position = Convert.ToInt32(Console.ReadLine());
+
+                        //    if (position == 0 || position > products.Count)
+                        //    {
+                        //        Console.WriteLine("This position is not allowed");
+                        //        Edit();
+                        //    }
+
+                        //    var elementToEdit = products[position - 1];
+                        //    elementToEdit.questionsAdd();
+                        //}
                     }
+            }
+        }
+        void ShowProduct()
+        {
+            foreach (var item in _productRepository.GetProducts())
+            {
+                Console.WriteLine(item);
             }
 
         }
+    }
+
+}
 
     }
     // Eine andere Klasse, die die Methode des Interfaces aufruft

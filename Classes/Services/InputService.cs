@@ -23,6 +23,11 @@ public class InputService : IInputService
 
     }
 
+    public void CreateProductInput()
+    {
+        throw new NotImplementedException();
+    }
+
     //    private static IUserChoice _userChoice = new UserChoice();
 
     //    public InputService(IUserChoice userChoice)
@@ -76,27 +81,22 @@ public class InputService : IInputService
     }
 
 
-    public Product EditProduct()
+    public void EditProduct(IList<Product> products)
     {
         Console.WriteLine("Please choose item to edit (input position number): ");
         var position = Convert.ToInt32(Console.ReadLine());
 
-        if (position == 0 || position >= _productRepository.Count)
+        if (position != -1)
         {
             Console.WriteLine("This position is not allowed");
         }
 
-        var elementToEdit = products[position - 1];
-        return elementToEdit;
 
+        //void IInputService.DisplayUserOptions()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
-
-
-
-    //void IInputService.DisplayUserOptions()
-    //{
-    //    throw new NotImplementedException();
-    //}
 }
 //public void CreateProductInput()
 //{
