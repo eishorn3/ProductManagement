@@ -6,9 +6,12 @@ namespace ProductManagement;
 
 public class Program
 {
-    private static IInputService _inputService = new InputService();
-    public static IUserChoice _userChoice = new UserChoice();
     public static IProductRepository _productRepository = new ProductRepository();
+
+    private static IInputService _inputService = new InputService(_productRepository);
+    private static IInputService _inputServices = new InputService(_lipstickService);
+
+    public static IUserChoice _userChoice = new UserChoice();
     public static ILipstickService _lipstickService = new LipstickService(_inputService);
     //private static IInputService _inputService = new InputService();
     //private static IJsonSaveLoadService _saveLoad = new JsonSaveLoadService();
@@ -54,22 +57,33 @@ public class Program
                     }
                     void EditProduct()
                     {
-                        foreach (var item in _productRepository.GetProducts())
-                        {
-                            Console.WriteLine(item);
-                        }
+                        var productList = _productRepository.GetProducts().ToList();
+                        var elementToEdit = _inputService.EditProduct(productList);
+                        elementToEdit = _lipstickService.CreateLipsticktInput();
+                        _productRepository.Add(elementToEdit);
 
-                        var position = _userChoice.choiceTwo();
-                        var products = _productRepository.GetProducts();
-                        var chean = _productRepository.GetProducts().Count();
-                        if (position == 0 || position >= _productRepository.GetProducts().Count())
-                        {
-                            Console.WriteLine("bla");
-                            return;
-                        }
+                        //InputService
+                        //var editedProduct = _inputService.EditProduct();
+
+                        // _________________________________________________
+
+                        //foreach (var item in _productRepository.GetProducts())
+                        //{
+                        //    Console.WriteLine(item);
+                        //}
+
+                        //var position = _userChoice.choiceTwo();
+                        //var products = _productRepository.GetProducts();
+                        //var chean = _productRepository.GetProducts().Count();
+                        //if (position == 0 || position >= _productRepository.GetProducts().Count())
+                        //{
+                        //    Console.WriteLine("bla");
+                        //    return;
+                        //}
 
 
-                        var elementToEdit = products[position - 1];
+                        //var elementToEdit = products[position - 1];
+                        // _________________________________________________
 
                         //    Show();
 
@@ -97,22 +111,23 @@ public class Program
 
         }
     }
-
 }
 
-    }
-    // Eine andere Klasse, die die Methode des Interfaces aufruft
 
-    //    UserChoice GetUserChoice()
-    //    {
-    //        // Erstellen Sie eine Instanz von MyClass
-    //        UserChoice myInstance = new UserChoice();
-    //        string userChoiceOne = myInstance.choiceOne();
-    //        decimal userChoiceTwo = myInstance.choiceTwo();
 
-    //    }
-    //}
-}
+
+// Eine andere Klasse, die die Methode des Interfaces aufruft
+
+//    UserChoice GetUserChoice()
+//    {
+//        // Erstellen Sie eine Instanz von MyClass
+//        UserChoice myInstance = new UserChoice();
+//        string userChoiceOne = myInstance.choiceOne();
+//        decimal userChoiceTwo = myInstance.choiceTwo();
+
+//    }
+//}
+
 
 //var products = _saveLoad.JsonLoad();
 //_repository.AddRange(products);

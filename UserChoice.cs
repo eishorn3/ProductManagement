@@ -4,7 +4,7 @@ public class UserChoice : IUserChoice
 {
     public string choiceOne()
     {
-        Console.WriteLine("Please enter alphabet");
+        Console.WriteLine("Please give an input");
         string choiceOne = Console.ReadLine();
         return choiceOne;
     }

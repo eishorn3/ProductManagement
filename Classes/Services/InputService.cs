@@ -5,6 +5,20 @@ namespace ProductManagement.Classes.Services;
 
 public class InputService : IInputService
 {
+    private IProductRepository _productRepository;
+
+    public InputService(IProductRepository productRepository)
+    {
+        _productRepository = productRepository;
+    }
+
+    private readonly ILipstickService lipstickservice;
+
+    public InputService(ILipstickService lipstickService)
+    {
+        this.lipstickservice = lipstickservice;
+    }
+
     public Product CreateProductInput(Product product)
     {
         Console.WriteLine("Please enter the brand: ");
@@ -23,10 +37,6 @@ public class InputService : IInputService
 
     }
 
-    public void CreateProductInput()
-    {
-        throw new NotImplementedException();
-    }
 
     //    private static IUserChoice _userChoice = new UserChoice();
 
@@ -81,22 +91,38 @@ public class InputService : IInputService
     }
 
 
-    public void EditProduct(IList<Product> products)
+
+    public Product EditProduct(IList<Product> products)
     {
         Console.WriteLine("Please choose item to edit (input position number): ");
         var position = Convert.ToInt32(Console.ReadLine());
 
-        if (position != -1)
+        if (position == 0 || position > products.Count)
         {
             Console.WriteLine("This position is not allowed");
         }
+        var elementToEdit = products[position - 1];
+        //elementToEdit = new Lipstick();
 
+        if (elementToEdit is Lipstick lipstickToEdit && this.lipstickservice != null)
+        {
+            _productRepository.Remove(elementToEdit);
+            var editedLipstick = lipstickservice.CreateLipsticktInput();
+            _productRepository.Add(editedLipstick);
+            //elementToEdit = (Lipstick)this.CreateProductInput(elementToEdit);
+            //elementToEdit.
+
+        }
+        return elementToEdit;
+        //_products.Add(elementToEdit);
 
         //void IInputService.DisplayUserOptions()
         //{
         //    throw new NotImplementedException();
         //}
     }
+
+
 }
 //public void CreateProductInput()
 //{

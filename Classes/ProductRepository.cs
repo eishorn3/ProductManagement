@@ -12,6 +12,11 @@ public class ProductRepository : IProductRepository
         _products.Add(product);
     }
 
+    public void Remove(Product product)
+    {
+        _products.Remove(product);
+    }
+
     public void AddRange(IEnumerable<Product> products)
     {
         _products.AddRange(products);
@@ -21,6 +26,8 @@ public class ProductRepository : IProductRepository
     {
         return _products;
     }
+
+
 
 
 }
