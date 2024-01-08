@@ -104,10 +104,10 @@ public class InputService : IInputService
         var elementToEdit = products[position - 1];
         //elementToEdit = new Lipstick();
 
-        if (elementToEdit is Lipstick lipstickToEdit && this.lipstickservice != null)
+        if (elementToEdit is Product product && this.lipstickservice != null && elementToEdit.ProductCategory == "Lipstick")
         {
             _productRepository.Remove(elementToEdit);
-            var editedLipstick = lipstickservice.CreateLipsticktInput();
+            var editedLipstick = (Product)this.lipstickservice.CreateLipsticktInput();
             _productRepository.Add(editedLipstick);
             //elementToEdit = (Lipstick)this.CreateProductInput(elementToEdit);
             //elementToEdit.
