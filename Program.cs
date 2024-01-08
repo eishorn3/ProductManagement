@@ -59,7 +59,6 @@ public class Program
                     {
                         var productList = _productRepository.GetProducts().ToList();
                         var elementToEdit = _inputService.EditProduct(productList);
-                        elementToEdit = _lipstickService.CreateLipsticktInput();
                         _productRepository.Add(elementToEdit);
 
                         //InputService

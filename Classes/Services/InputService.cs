@@ -106,12 +106,7 @@ public class InputService : IInputService
 
         if (elementToEdit is Product product && this.lipstickservice != null && elementToEdit.ProductCategory == "Lipstick")
         {
-            _productRepository.Remove(elementToEdit);
-            var editedLipstick = (Product)this.lipstickservice.CreateLipsticktInput();
-            _productRepository.Add(editedLipstick);
-            //elementToEdit = (Lipstick)this.CreateProductInput(elementToEdit);
-            //elementToEdit.
-
+            var changedLipstick = lipstickservice.EditLipstick(elementToEdit);
         }
         return elementToEdit;
         //_products.Add(elementToEdit);
