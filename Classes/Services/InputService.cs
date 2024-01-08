@@ -5,38 +5,14 @@ namespace ProductManagement.Classes.Services;
 
 public class InputService : IInputService
 {
-    private IProductRepository _productRepository;
+    private readonly ILipstickService _lipstickService;
+    private readonly IProductRepository _productRepository;
 
-    public InputService(IProductRepository productRepository)
+    public InputService(IProductRepository productRepository, ILipstickService lipstickService)
     {
         _productRepository = productRepository;
+        _lipstickService = lipstickService;
     }
-
-    private readonly ILipstickService lipstickservice;
-
-    public InputService(ILipstickService lipstickService)
-    {
-        this.lipstickservice = lipstickservice;
-    }
-
-    public Product CreateProductInput(Product product)
-    {
-        Console.WriteLine("Please enter the brand: ");
-        product.ProductBrand = Console.ReadLine();
-
-        Console.WriteLine("Please enter the name: ");
-        product.ProductName = Console.ReadLine();
-
-        Console.WriteLine("Please enter the definition: ");
-        product.ProductDefinition = Console.ReadLine();
-
-        Console.WriteLine("Please enter the price: ");
-        product.ProductPrice = Convert.ToDecimal(Console.ReadLine());
-
-        return product;
-
-    }
-
 
     //    private static IUserChoice _userChoice = new UserChoice();
 
@@ -81,8 +57,8 @@ public class InputService : IInputService
     {
         Console.WriteLine("Hey! Welcome to our Douglas Prodcut Management Site.");
         Console.WriteLine("1: Add a product");
-        Console.WriteLine("2: Show a product");
-        Console.WriteLine("3: Edit a product");
+        Console.WriteLine("2: Edit a product");
+        Console.WriteLine("3: Show a product");
         Console.WriteLine("4: Delete a product");
         Console.WriteLine("5: Close the Product Manager");
         Console.WriteLine("Choose an option: ");
@@ -92,10 +68,13 @@ public class InputService : IInputService
 
 
 
-    public Product EditProduct(IList<Product> products)
+    public Product EditProduct()
     {
-        Console.WriteLine("Please choose item to edit (input position number): ");
+        ShowProduct();
+        Console.WriteLine("\nPlease choose item to edit (input position number): ");
         var position = Convert.ToInt32(Console.ReadLine());
+
+        var products = _productRepository.GetProducts().ToList();
 
         if (position == 0 || position > products.Count)
         {
@@ -104,10 +83,15 @@ public class InputService : IInputService
         var elementToEdit = products[position - 1];
         //elementToEdit = new Lipstick();
 
-        if (elementToEdit is Product product && this.lipstickservice != null && elementToEdit.ProductCategory == "Lipstick")
+        if (elementToEdit is Lipstick lipstick)
         {
-            var changedLipstick = lipstickservice.EditLipstick(elementToEdit);
+            _lipstickService.EditLipsticktInput(lipstick);
         }
+        //else if (elementToEdit is Perfume)
+        //{
+        //    _perfumeSericebla
+        //}
+
         return elementToEdit;
         //_products.Add(elementToEdit);
 
@@ -117,7 +101,13 @@ public class InputService : IInputService
         //}
     }
 
-
+    public void ShowProduct()
+    {
+        foreach (var item in _productRepository.GetProducts())
+        {
+            Console.WriteLine(item);
+        }
+    }
 }
 //public void CreateProductInput()
 //{

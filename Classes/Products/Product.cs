@@ -1,11 +1,10 @@
-﻿using ProductManagement.Interfaces;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace ProductManagement.Classes.Products;
 
 [JsonDerivedType(typeof(Lipstick), typeDiscriminator: "L")]
 //[JsonDerivedType(typeof(Perfume), typeDiscriminator: "P")]
-public abstract class Product : IProduct
+public abstract class Product
 {
     public virtual string? ProductCategory { get; }
     public string? ProductBrand { get; set; }

@@ -1,10 +1,10 @@
 ﻿using ProductManagement.Classes.Products;
-using ProductManagement.Interfaces;
 
 namespace ProductManagement;
 
-public interface ILipstickService : IProduct
+public interface ILipstickService
 {
     public Lipstick CreateLipsticktInput();
+    public void EditLipsticktInput(Lipstick lipstick);
 
 }

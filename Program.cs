@@ -6,13 +6,12 @@ namespace ProductManagement;
 
 public class Program
 {
-    public static IProductRepository _productRepository = new ProductRepository();
+    public static IProductRepository ProductRepository = new ProductRepository();
+    private static readonly ILipstickService LipstickService = new LipstickService();
 
-    private static IInputService _inputService = new InputService(_productRepository);
-    private static IInputService _inputServices = new InputService(_lipstickService);
+    private static readonly IInputService InputService = new InputService(ProductRepository, LipstickService);
 
-    public static IUserChoice _userChoice = new UserChoice();
-    public static ILipstickService _lipstickService = new LipstickService(_inputService);
+    public static IUserChoice UserChoice = new UserChoice();
     //private static IInputService _inputService = new InputService();
     //private static IJsonSaveLoadService _saveLoad = new JsonSaveLoadService();
     public static void Main(string[] args)
@@ -26,8 +25,8 @@ public class Program
         {
             //inputService.DisplayUserOptions();
             //decimal displayInput = userChoice.choiceTwo();
-            _inputService.DisplayUserOptions();
-            var displayInput = _userChoice.choiceTwo();
+            InputService.DisplayUserOptions();
+            var displayInput = UserChoice.choiceTwo();
 
             //decimal displayInput = userChoice.choiceTwo();
 
@@ -40,26 +39,24 @@ public class Program
                     EditProduct();
                     break;
                 case 3:
-                    ShowProduct();
+                    InputService.ShowProduct();
                     break;
                 default:
                     break;
 
                     void CreateProduct()
                     {
-                        var input = _userChoice.choiceOne();
+                        var input = UserChoice.choiceOne();
                         if (input?.ToLowerInvariant() == "lipstick")
                         {
-                            var lipstick = _lipstickService.CreateLipsticktInput();
-                            _productRepository.Add(lipstick);
+                            var lipstick = LipstickService.CreateLipsticktInput();
+                            ProductRepository.Add(lipstick);
                         }
 
                     }
                     void EditProduct()
                     {
-                        var productList = _productRepository.GetProducts().ToList();
-                        var elementToEdit = _inputService.EditProduct(productList);
-                        _productRepository.Add(elementToEdit);
+                        var elementToEdit = InputService.EditProduct();
 
                         //InputService
                         //var editedProduct = _inputService.EditProduct();
@@ -100,14 +97,6 @@ public class Program
                         //}
                     }
             }
-        }
-        void ShowProduct()
-        {
-            foreach (var item in _productRepository.GetProducts())
-            {
-                Console.WriteLine(item);
-            }
-
         }
     }
 }
