@@ -4,15 +4,11 @@ namespace ProductManagement.Interfaces;
 
 public interface IInputService
 {
-    public void ShowProduct();
-    //    Product DeleteInput(IList<Product> products);
     public void DisplayUserOptions();
+    public void CreateProduct();
     public Product EditProduct();
+    public void ShowProduct();
+    public void DeleteProduct();
 
-    //    IProduct CreateProduct();
-    //    ____
-    //    //Product AddProduct();
-    //    //void EditProduct();
-    //    //public IList<Product> DeleteProduct();
 
 }

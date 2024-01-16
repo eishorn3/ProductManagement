@@ -1,29 +1,17 @@
-﻿//using System.Text.Json.Serialization;
+﻿using ProductManagement.Classes.Products;
 
-//[Serializable]
-//public class Perfume : Product, IInputService
-//{
-//    [JsonInclude]
-//    [JsonPropertyName("productScent")]
-//    public string? ProductScent { get; set; }
+[Serializable]
+public class Perfume : Product
+{
 
-//    public void AddProduct()
-//    {
-//        throw new NotImplementedException();
-//    }
+    public string? ProductScent { get; set; }
+    public override string? ProductCategory { get; } = nameof(Perfume);
 
-//    public override string ToString()
-//    {
-//        return base.ToString() + $"\tProductScent: {ProductScent}\n";
-//    }
-//    _________________________
 
-//    //public override void questionsAdd()
-//    //{
-//    //    base.questionsAdd();
-//    //    Console.WriteLine("Please enter the scent: ");
-//    //    string productScent = Console.ReadLine();
-//    //    ProductScent = productScent;
 
-//    //}
-//}
+    public override string ToString()
+    {
+        return base.ToString() + $"\tProductScent: {ProductScent}\n";
+    }
+
+}

@@ -3,7 +3,7 @@
 namespace ProductManagement.Classes.Products;
 
 [JsonDerivedType(typeof(Lipstick), typeDiscriminator: "L")]
-//[JsonDerivedType(typeof(Perfume), typeDiscriminator: "P")]
+[JsonDerivedType(typeof(Perfume), typeDiscriminator: "P")]
 public abstract class Product
 {
     public virtual string? ProductCategory { get; }
@@ -18,25 +18,3 @@ public abstract class Product
     }
 }
 
-//    __________________________
-
-//    //public virtual void questionsAdd()
-//    //{
-//    //    Console.WriteLine("Please enter the category: ");
-//    //    ProductCategory = Console.ReadLine();
-
-//    //    Console.WriteLine("Please enter the brand: ");
-//    //    ProductBrand = Console.ReadLine();
-
-//    //    Console.WriteLine("Please enter the name: ");
-//    //    ProductName = Console.ReadLine();
-
-//    //    Console.WriteLine("Please enter the definition: ");
-//    //    ProductDefinition = Console.ReadLine();
-
-//    //    Console.WriteLine("Please enter the price: ");
-//    //    ProductPrice = Convert.ToDecimal(Console.ReadLine());
-//    //}
-
-
-//}
